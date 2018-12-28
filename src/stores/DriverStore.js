@@ -25,7 +25,7 @@ class DriverStore extends BaseStore {
       let url = `${process.env.API_URL}/v1/driver/${userId}`;
       let response = await http.get(url);
       if (response.statusCode === 200) {
-        this.data = response;
+        this.data = response.body || {};
       } else this.data = undefined;
     } catch (err) {
       this.error = err.message;
