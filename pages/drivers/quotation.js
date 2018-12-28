@@ -52,7 +52,7 @@ class Quotation extends Component {
               <div className="form-group">
                 <div className="container-login100-form-btn">
                   <button className="login100-form-btn" onClick={() => { liffHelper.closeWindow() }}>
-                  ปิด
+                    ปิด
                   </button>
                 </div>
               </div>
