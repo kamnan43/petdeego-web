@@ -21,6 +21,15 @@ class Request extends Component {
       .then(profile => {
         this.props.service.setCustomer(profile);
         console.log(profile);
+      })
+      .catch(err => {
+        console.log('err', err);
+        const profile = {
+          userId: 'U9a177bd20d2fe886e1551d282a653494',
+          displayName: 'หนึ่ง',
+          pictureUrl: 'http://dl.profile.line-cdn.net/0h2IBMKqnRbWZ_NEAT3P8SMUNxYwsIGmsuBwJxV1pnYVFRDC0zEAEqA1g0YQEHBn00RAV2VVxkMldS',
+        };
+        this.props.service.setCustomer(profile);
       });
   }
 
