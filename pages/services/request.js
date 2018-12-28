@@ -1,5 +1,6 @@
-import { Component } from 'react'
+import { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react';
+import DefaultLayout from '../../components/layout/DefaultLayout';
 
 class Request extends Component {
   componentDidMount() {
@@ -8,9 +9,11 @@ class Request extends Component {
 
   render() {
     return (
-      <div>
-        User Request!
-      </div>
+      <Fragment>
+        <DefaultLayout>
+          {/* <Servi */}
+        </DefaultLayout>
+      </Fragment>
     )
   }
 }

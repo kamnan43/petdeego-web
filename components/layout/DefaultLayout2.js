@@ -6,7 +6,7 @@ import Header from './Header';
 
 import './DefaultLayout.scss';
 
-class DefaultLayout extends Component {
+class DefaultLayout2 extends Component {
   constructor(props) {
     super();
   }
@@ -17,13 +17,18 @@ class DefaultLayout extends Component {
   render() {
     return (
       <Fragment>
-        <Head title="" author="" />
+        <Head 
+          title="เรียนภาษาจีนกับเหล่าซืออายะ - AYA Chinese"
+          author="AYA Chinese"
+        />
         <div className="wrapper" id="wrapper">
+          <Header />
           {this.props.children}
         </div>
+        <Footer />
       </Fragment>
     )
   }
 }
 
-export default DefaultLayout;
+export default DefaultLayout2;
