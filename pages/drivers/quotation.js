@@ -8,7 +8,7 @@ import Header from 'components/form/Header';
 class Quotation extends Component {
   constructor(props) {
     super(props);
-    let liffHelper = {};
+    this.liffHelper = {};
   }
 
   componentWillMount() {
@@ -27,7 +27,6 @@ class Quotation extends Component {
           await this.props.quotation.getData(quotation.driver.userId, orderId);
         }
       });
-
   }
 
   onPriceChange(event) {

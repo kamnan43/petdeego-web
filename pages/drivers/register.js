@@ -19,26 +19,24 @@ class Register extends Component {
     this.props.driver.resetData();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     require('../../src/utils/VConsole');
     const liffHelper = require('../../src/utils/Liffhelper');
-    liffHelper.default.getProfile()
-      .then(profile => {
-        // console.log("======== profile", profile);
-        let user = await this.props.driver.getUser(profile.userId);
-        if (user) {
-          this.setState({
-            isOldUser: true,
-            name: user.name,
-            tel: profile.tel,
-          });
-        } else {
-          this.setState({
-            isOldUser: false,
-            userId: profile.userId,
-          });
-        }
+    let profile = await liffHelper.default.getProfile()
+    console.log("======== profile", profile);
+    let user = await this.props.driver.getUser(profile.userId);
+    if (user) {
+      this.setState({
+        isOldUser: true,
+        name: user.name,
+        tel: profile.tel,
       });
+    } else {
+      this.setState({
+        isOldUser: false,
+        userId: profile.userId,
+      });
+    }
   }
 
   // BUTTON EVENT
