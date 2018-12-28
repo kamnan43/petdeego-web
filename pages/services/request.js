@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import Header from 'components/form/Header';
 import { datetime } from '../../src/utils/datetime';
+import Datetime from 'react-datetime';
 
 const GMapPicker = dynamic(import('../../components/mappicker/GMapPicker'), {
   ssr: false
@@ -117,7 +118,7 @@ class Request extends Component {
 
   render() {
     const service = this.props.service.toJS().data;
-    const date = datetime.moment(service.date).format('YYYY-MM-DD')
+    const date = datetime.moment(service.date).format('DD/MM/YYYY LT')
     return (
       <Fragment>
         <NextHead>
@@ -195,10 +196,13 @@ class Request extends Component {
 
             <div className="form-group col-sm-12">
               <label>วันที่</label>
-              <input type="date" className="form-control"
+              <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' onChange={e => {
+                  this.setVal('date', e.format())
+                }} />
+              {/* <input type="date" className="form-control"
                 id="date" value={service.date} value={date} onChange={e => {
                   this.setVal('date', new Date(e.target.value))
-                }} />
+                }} /> */}
             </div>
 
             <div className="form-group col-sm-12">
