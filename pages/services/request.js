@@ -2,6 +2,7 @@ import { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import Header from 'components/form/Header';
+import { isolateGlobalState } from 'mobx/lib/internal';
 
 class Request extends Component {
   componentDidMount() {
@@ -9,6 +10,13 @@ class Request extends Component {
   }
 
   checkDog(event) {
+    const type = this.props.service.toJS().data.pet_type;
+    const found = type.find(val => val === 'dog');
+    if (found) {
+
+    } else {
+
+    }
     console.log('event', event.target.value);
   }
 
@@ -18,7 +26,10 @@ class Request extends Component {
 
 
   render() {
-    const service = this.service.toJS(); 
+    const service = this.props.service.toJS().data;
+    const cat = service.pet_type.find(val => val === 'cat');
+    const dog = service.pet_type.find(val => val === 'dog');
+
     return (
       <Fragment>
         <DefaultLayout>
@@ -28,7 +39,7 @@ class Request extends Component {
               <label> ประเภทสัตว์เลี้ยง</label>
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="dog" onClick={this.checkDog.bind(this)} />
+                  <input className="form-check-input" type="checkbox" id="dog" onClick={this.checkDog.bind(this)} checked={dog}/>
                   <label className="form-check-label">
                     สุนัข
                   </label>
@@ -36,7 +47,7 @@ class Request extends Component {
               </div>
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="cat" onClick={this.checkCat.bind(this)} />
+                  <input className="form-check-input" type="checkbox" id="cat" onClick={this.checkCat.bind(this)} checked={cat}/>
                   <label className="form-check-label">
                     แมว
                   </label>
@@ -100,4 +111,4 @@ class Request extends Component {
   }
 }
 
-export default inject('services')(observer(Request));
+export default inject('service')(observer(Request));

@@ -1,7 +1,7 @@
 import home from './HomeStore'
 import content from './ContentStore'
 import quotation from './QuotationStore';
-import services from './ServiceStore';
+import service from './ServiceStore';
 
 export default {
   home,
