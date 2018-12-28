@@ -19,33 +19,42 @@ class Register extends Component {
     this.props.driver.resetData();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     require('../../src/utils/VConsole');
     const liffHelper = require('../../src/utils/Liffhelper');
-    liffHelper.default.getProfile()
-      .then(profile => {
-        // console.log("======== profile", profile);
-        this.setState({ userId: profile.userId })
+    let profile = await liffHelper.default.getProfile()
+    console.log("======== profile", profile);
+    let user = await this.props.driver.getUser(profile.userId);
+    if (user) {
+      this.setState({
+        isOldUser: true,
+        name: user.name,
+        tel: profile.tel,
       });
+    } else {
+      this.setState({
+        isOldUser: false,
+        userId: profile.userId,
+      });
+    }
   }
 
   // BUTTON EVENT
   gotoSave = async () => {
-    try {
-      let driver = {
-        user_id: this.state.userId,
-        name: this.state.name,
-        tel: this.state.tel,
-        isDog: this.state.isDog,
-        isCat: this.state.isCat,
-        isOther: this.state.isOther,
-        hasCage: this.state.hasCage,
-      };
-      await this.props.driver.saveData(driver);
-      liffHelper.closeWindow();
-    } catch (err) {
-      // this.refs.noti.error(err.message, getText(keys.component.failed));
-    }
+    let driver = {
+      isOldUser: this.state.isOldUser,
+      user_id: this.state.userId,
+      name: this.state.name,
+      tel: this.state.tel,
+      isDog: this.state.isDog,
+      isCat: this.state.isCat,
+      isOther: this.state.isOther,
+      hasCage: this.state.hasCage,
+    };
+    await this.props.driver.saveData(driver);
+
+    const liffHelper = require('../../src/utils/Liffhelper');
+    liffHelper.closeWindow();
   }
 
   render() {

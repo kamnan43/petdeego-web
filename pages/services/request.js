@@ -121,7 +121,7 @@ class Request extends Component {
               <div className="col-sm-6">
                 <div className="form-check">
                   <input className="form-check-input" type="checkbox" id="dog" onClick={this.changePetType.bind(this, 'dog')} value={service.type_dog} />
-                  <label className="form-check-label" for="dog">
+                  <label className="form-check-label" htmlFor="dog">
                     สุนัข
                   </label>
                 </div>
@@ -129,7 +129,7 @@ class Request extends Component {
               <div className="col-sm-6">
                 <div className="form-check">
                   <input className="form-check-input" type="checkbox" id="cat" onClick={this.changePetType.bind(this, 'cat')} value={service.type_cat} />
-                  <label className="form-check-label" for="cat">
+                  <label className="form-check-label" htmlFor="cat">
                     แมว
                   </label>
                 </div>
@@ -158,7 +158,7 @@ class Request extends Component {
                       onChange={e => {
                         this.setVal('owner', e.target.checked)
                       }} />
-                    <label className="form-check-label" for="owner">
+                    <label className="form-check-label" htmlFor="owner">
                       เจ้าของไปด้วย
                   </label>
                   </div>

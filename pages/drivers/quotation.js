@@ -6,23 +6,26 @@ import { withRouter } from 'next/router';
 import Header from 'components/form/Header';
 
 class Quotation extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentWillMount() {
     
   }
   async componentDidMount() {
     require('../../src/utils/VConsole');
-    const liffHelper = require('../../src/utils/Liffhelper');
+    let liffHelper = require('../../src/utils/Liffhelper');
     liffHelper.default.getProfile()
-      .then(profile => {
-        this.props.quotation.setDriver(profile);
+      .then(async profile => {
+        await this.props.quotation.setDriver(profile);
+        if (this.props.router && this.props.router.query && this.props.router.query.order_id) {
+          let quotation = this.props.quotation.toJS();
+          const orderId = this.props.router.query.order_id;
+          this.props.quotation.setOrderId(orderId);
+          await this.props.quotation.getData(quotation.driver.userId, orderId);
+        }
       });
-
-    if (this.props.router && this.props.router.query && this.props.router.query.order_id) {
-      let quotation = this.props.quotation.toJS();
-      const orderId = this.props.router.query.order_id;
-      this.props.quotation.setOrderId(orderId);
-      await this.props.quotation.getData(quotation.driver.userId, orderId);
-    }
   }
 
   onPriceChange(event) {
@@ -41,6 +44,11 @@ class Quotation extends Component {
     return true;
   }
 
+  closeLiff() {
+    let liffHelper = require('../../src/utils/Liffhelper');
+    liffHelper.default.closeWindow();
+  }
+
   render() {
     let quotation = this.props.quotation.toJS();
     if (!this.isEmpty(quotation.data)) {
@@ -51,7 +59,7 @@ class Quotation extends Component {
             <form className="col-md-12">
               <div className="form-group">
                 <div className="container-login100-form-btn">
-                  <input value="ปิด" type="button" name="close" className="login100-form-btn" onClick={() => { liffHelper.closeWindow() }} />
+                  <input value="ปิด" type="button" name="close" className="login100-form-btn" onClick={() => { this.closeLiff(); }} />
                 </div>
               </div>
             </form>
