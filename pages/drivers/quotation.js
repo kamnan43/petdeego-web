@@ -18,15 +18,15 @@ class Quotation extends Component {
 
   render() {
     let quotation = this.props.quotation.toJS();
-    if (quotation.data.length) {
+    if (quotation.data) {
       return (
         <DefaultLayout>
-          <Header title="Quotation" />
+          <Header title="คุณได้เสนอราคาไปแล้ว" />
           <div className="login100-form  row">
             <form className="col-md-12">
               <div className="form-group">
                 <div className="container-login100-form-btn">
-                  <button className="login100-form-btn">
+                  <button className="login100-form-btn" onClick={() => { liffHelper.closeWindow() }}>
                   ปิด
                   </button>
                 </div>
@@ -38,7 +38,7 @@ class Quotation extends Component {
     } else {
       return (
         <DefaultLayout>
-          <Header title="Quotation" />
+          <Header title="เสนอราคา" />
           <div className="login100-form  row">
             <form className="col-md-12">
               <div className="form-group">
