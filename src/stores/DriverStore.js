@@ -23,6 +23,7 @@ class DriverStore extends BaseStore {
     this.error = '';
     try {
       let url = `${process.env.API_URL}/v1/driver/${userId}`;
+      console.log("======== getUser - url:", url);
       let response = await http.get(url);
       console.log("======== response:", response);
       this.data = response;
@@ -35,10 +36,11 @@ class DriverStore extends BaseStore {
   }
 
   async saveData(driver) {
+    console.log("======== saveData:", driver);
     this.loading = true;
     this.error = '';
     try {
-      if (driver.isOldUser) {
+      if (!driver.isOldUser) {
         await http.post(`${process.env.API_URL}/v1/driver`, { json: driver });
       } else {
         await http.put(`${process.env.API_URL}/v1/driver/${driver.user_id}`, { json: driver });
