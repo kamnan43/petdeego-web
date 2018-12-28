@@ -129,18 +129,16 @@ class Request extends Component {
           <div className="login100-form row">
             <div className="form-group col-sm-12">
               <label> ประเภทสัตว์เลี้ยง</label>
-              <div className="col-sm-6">
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="dog" onClick={this.changePetType.bind(this, 'dog')} value={service.type_dog} />
-                  <label className="form-check-label p-l-5" htmlFor="dog">
+              <div className="col-sm-6 nopadding">
+                <div className="contact100-form-checkbox">
+                  <input className="form-check-input input-checkbox100" id="dog" type="checkbox" name="dog" onClick={this.changePetType.bind(this, 'dog')} value={service.type_dog} />
+                  <label className="form-check-label label-checkbox100" htmlFor="dog">
                     สุนัข
                   </label>
                 </div>
-              </div>
-              <div className="col-sm-6">
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="cat" onClick={this.changePetType.bind(this, 'cat')} value={service.type_cat} />
-                  <label className="form-check-label p-l-5" htmlFor="cat">
+                <div className="contact100-form-checkbox">
+                  <input className="form-check-input input-checkbox100" id="cat" type="checkbox" name="cat" onClick={this.changePetType.bind(this, 'cat')} value={service.type_cat} />
+                  <label className="form-check-label label-checkbox100" htmlFor="cat">
                     แมว
                   </label>
                 </div>
@@ -163,16 +161,17 @@ class Request extends Component {
             </div>
 
             <div className="form-group col-sm-12">
-              <div className="col-sm-6">
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="owner"
-                    onChange={e => {
-                      this.setVal('owner', e.target.checked)
-                    }} />
-                  <label className="form-check-label p-l-5" htmlFor="owner">
-                    เจ้าของไปด้วย
-                  </label>
-                </div>
+              <div className="col-sm-6 nopadding">
+                <div className="contact100-form-checkbox">
+                    <input className="form-check-input input-checkbox100" id="owner" 
+                      type="checkbox" name="owner" 
+                      onChange={e => {
+                        this.setVal('owner', e.target.checked)
+                      }} />
+                    <label className="form-check-label label-checkbox100" htmlFor="owner">
+                      เจ้าของไปด้วย
+                    </label>
+                  </div>
               </div>
             </div>
 
