@@ -1,10 +1,8 @@
 import { Component, Fragment } from 'react'
 
 import Head from './Head';
-import Footer from './Footer';
-import Header from './Header';
 
-import './DefaultLayout.scss';
+import './styles/DefaultLayout.scss';
 
 class DefaultLayout extends Component {
   constructor(props) {
