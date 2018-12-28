@@ -38,14 +38,19 @@ class Request extends Component {
   }
 
   onSourceLocationChange(e) {
-    console.log('source location -> ', e);
+    if (e.position) {
+      this.props.service.changeSourcePosition(e.position);
+    }
   }
 
   onDestinationLocationChange(e) {
-    console.log('destination location -> ', e);
+    if (e.position) {
+      this.props.service.changeDestinationPosition(e.position);
+    }
   }
+
   setQty() {
-    
+
   }
 
   render() {
@@ -79,35 +84,12 @@ class Request extends Component {
                   </label>
                 </div>
               </div>
-
-
-              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                <span className="label-input100">ต้นทาง</span>
-                <input className="input100" type="number" name="qty" placeholder="" />
-                <span className="focus-input100" />
-                <GMapPicker
-                  mapElement={<div style={ {height: '250px'} } />}
-                  onChange={this.onSourceLocationChange.bind(this)}
-                  showCurrentLocationButton
-                />
-              </div>
-            </div>
-
-            <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-              <span className="label-input100">ปลายทาง</span>
-              <input className="input100" type="number" name="qty" placeholder="" />
-              <span className="focus-input100" />
-              <GMapPicker
-                mapElement={<div style={ {height: '250px'} } />}
-                onChange={this.onDestinationLocationChange.bind(this)}
-                showCurrentLocationButton
-              />
             </div>
 
             <div className="form-group col-sm-12">
-               <label>จำนวนสัตว์เลี้ยง</label>
-               <input type="text" className="form-control" id="qty" placeholder="" />
-              </div>
+              <label>จำนวนสัตว์เลี้ยง</label>
+              <input type="text" className="form-control" id="qty" placeholder="" />
+            </div>
 
             <div className="form-group col-sm-12">
               <label>ขนาดสัตว์เลี้ยง</label>
@@ -161,7 +143,6 @@ class Request extends Component {
                 </button>
               </div>
             </div>
-
           </div>
         </DefaultLayout>
       </Fragment>

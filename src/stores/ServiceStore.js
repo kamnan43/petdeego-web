@@ -61,6 +61,16 @@ class HomeStore extends BaseStore {
     this.data.qty = qty;
   }
 
+  changeSourcePosition(position) {
+    this.data.source.lat = position.lat;
+    this.data.source.lng = position.lng;
+  }
+
+  changeDestinationPosition(position) {
+    this.data.destination.lat = position.lat;
+    this.data.destination.lng = position.lng;
+  }
+
   async getData(homeId) {
     this.loading = true;
     let url = `${process.env.CMS_API_URL}/v1/layouts/${homeId}`;
@@ -75,5 +85,6 @@ class HomeStore extends BaseStore {
     this.loading = false;
   }
 }
+
 export default new HomeStore();
 
