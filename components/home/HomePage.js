@@ -1,6 +1,7 @@
 import { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react';
 
+import Header from 'components/form/Header';
 class HomePage extends Component {
   componentDidMount() {
   }
@@ -8,11 +9,7 @@ class HomePage extends Component {
   render() {
     return (
       <Fragment>
-        <div className="login100-form-title" style={{ backgroundImage: 'url(/static/assets/images/petdeego/bg.jpg)' }}>
-          <span className="login100-form-title-1">
-            Hello
-              </span>
-        </div>
+        <Header title="WELCOME" />
         <form className="login100-form validate-form">
           <div className="wrap-input100 validate-input m-b-26" data-validate="Username is required">
             <span className="label-input100">Username</span>
