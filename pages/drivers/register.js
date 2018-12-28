@@ -6,6 +6,7 @@ import Header from 'components/form/Header';
 
 class Register extends Component {
   state = {
+    userId: '',
     name: '',
     tel: '',
     isDog: false,
@@ -19,6 +20,13 @@ class Register extends Component {
   }
 
   componentDidMount() {
+    require('../../src/utils/VConsole');
+    const liffHelper = require('../../src/utils/Liffhelper');
+    liffHelper.default.getProfile()
+      .then(profile => {
+        console.log("======== profile", profile);
+        this.setState({ userId: profile.userId })
+      });
   }
 
   // BUTTON EVENT
@@ -26,6 +34,7 @@ class Register extends Component {
     try {
       console.log("======== gotoSave");
       let driver = {
+        user_id: this.state.userId,
         name: this.state.name,
         tel: this.state.tel,
         isDog: this.state.isDog,
@@ -73,16 +82,16 @@ class Register extends Component {
             </div>
             <div className="form-group custom-checkbox">
               <label>ประเภทสัตว์เลี้ยง :</label>
-              <input type="checkbox" id="chkDog" value={this.state.isDog} onChange={event => this.setState({ isDog: event.target.value })} /> &nbsp;สุนัข
+              <input type="checkbox" id="chkDog" value={this.state.isDog} onChange={event => this.setState({ isDog: event.target.checked })} /> &nbsp;สุนัข
               &nbsp;&nbsp;&nbsp;
-              <input type="checkbox" id="chkCat" value={this.state.isCat} onChange={event => this.setState({ isCat: event.target.value })} /> &nbsp;แมว
+              <input type="checkbox" id="chkCat" value={this.state.isCat} onChange={event => this.setState({ isCat: event.target.checked })} /> &nbsp;แมว
               &nbsp;&nbsp;&nbsp;
-              <input type="checkbox" id="chkCat" value={this.state.isOther} onChange={event => this.setState({ isOther: event.target.value })} /> &nbsp;อื่นๆ
+              <input type="checkbox" id="chkCat" value={this.state.isOther} onChange={event => this.setState({ isOther: event.target.checked })} /> &nbsp;อื่นๆ
             </div>
             <div className="form-group" style={{ textAlign: 'center' }}>
               <input type="checkbox" id="chkCage"
                 value={this.state.hasCage}
-                onChange={event => this.setState({ hasCage: event.target.value })} />
+                onChange={event => this.setState({ hasCage: event.target.checked })} />
               &nbsp;&nbsp;ต้องมีกรง หรือตะกร้า เท่านั้น
             </div>
             <div className="form-group">
