@@ -8,7 +8,7 @@ class HomePage extends Component {
   render() {
     return (
       <Fragment>
-        <div className="login100-form-title" style={{ backgroundImage: 'url(images/bg-01.jpg)' }}>
+        <div className="login100-form-title" style={{ backgroundImage: 'url(/static/assets/images/petdeego/bg.jpg)' }}>
           <span className="login100-form-title-1">
             Sign In
               </span>
