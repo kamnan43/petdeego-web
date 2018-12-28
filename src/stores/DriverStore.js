@@ -23,14 +23,11 @@ class DriverStore extends BaseStore {
     this.error = '';
     try {
       let url = `${process.env.API_URL}/v1/driver/${userId}`;
-      console.log("======== getUser - url:", url);
       let response = await http.get(url);
-      console.log("======== response:", response);
       if (response.statusCode === 200) {
         this.data = response;
       } else this.data = {};
     } catch (err) {
-      console.log("======== err.message:", err.message);
       this.error = err.message;
     } finally {
       this.loading = false;

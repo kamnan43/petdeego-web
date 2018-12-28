@@ -56,7 +56,7 @@ class Register extends Component {
     await this.props.driver.saveData(driver);
 
     const liffHelper = require('../../src/utils/Liffhelper');
-    liffHelper.default.closeWindow();
+    // liffHelper.default.closeWindow();
   }
 
   render() {
