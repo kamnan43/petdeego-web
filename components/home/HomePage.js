@@ -10,7 +10,26 @@ class HomePage extends Component {
     return (
       <Fragment>
         <Header title="WELCOME" />
-        <form className="login100-form validate-form">
+        <div className="login100-form  row">
+          <form className="col-md-12">
+            <div className="form-group">
+              <label htmlFor="exampleInputEmail1">Email address</label>
+              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleInputPassword1">Password</label>
+              <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+            </div>
+            <div className="form-group">
+              <div className="container-login100-form-btn">
+                <button className="login100-form-btn">
+                  Login
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        {/* <form className="login100-form validate-form">
           <div className="wrap-input100 validate-input m-b-26" data-validate="Username is required">
             <span className="label-input100">Username</span>
             <input className="input100" type="text" name="username" placeholder="Enter username" />
@@ -39,7 +58,7 @@ class HomePage extends Component {
               Login
         </button>
           </div>
-        </form>
+        </form> */}
       </Fragment>
     );
   }
