@@ -26,17 +26,25 @@ class Register extends Component {
       .then(profile => {
         // console.log("======== profile", profile);
         let user = await this.props.driver.getUser(profile.userId);
-        this.setState({
-          userId: profile.userId,
-          name: user.name,
-          tel: profile.tel,
-        });
+        if (user) {
+          this.setState({
+            isOldUser: true,
+            name: user.name,
+            tel: profile.tel,
+          });
+        } else {
+          this.setState({
+            isOldUser: false,
+            userId: profile.userId,
+          });
+        }
       });
   }
 
   // BUTTON EVENT
   gotoSave = async () => {
     let driver = {
+      isOldUser: this.state.isOldUser,
       user_id: this.state.userId,
       name: this.state.name,
       tel: this.state.tel,

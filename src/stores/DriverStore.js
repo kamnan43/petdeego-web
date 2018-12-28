@@ -38,9 +38,12 @@ class DriverStore extends BaseStore {
     this.loading = true;
     this.error = '';
     try {
-      let url = `${process.env.API_URL}/v1/driver`;
-      let response = await http.post(url, { json: driver });
-      console.log("======== response:", response);
+      if (driver.isOldUser) {
+        await http.post(`${process.env.API_URL}/v1/driver`, { json: driver });
+      } else {
+        await http.put(`${process.env.API_URL}/v1/driver/${driver.user_id}`, { json: driver });
+      }
+      console.log("======== success");
     } catch (err) {
       console.log("======== err.message:", err.message);
       this.error = err.message;
