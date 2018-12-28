@@ -1,6 +1,7 @@
 import { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react';
 import DefaultLayout from '../components/layout/DefaultLayout';
+import HomePage from '../components/home/HomePage';
 
 class Request extends Component {
   componentDidMount() {
@@ -11,7 +12,7 @@ class Request extends Component {
     return (
       <Fragment>
         <DefaultLayout>
-          ssss
+          <HomePage />
         </DefaultLayout>
       </Fragment>
     )

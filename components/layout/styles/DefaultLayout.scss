@@ -1,5 +1,6 @@
 @import 'src/styles/app.scss';
 @import './style.scss';
 :global {
+  @import './main.scss';
   @import './custom.scss';
 }
