@@ -1,6 +1,7 @@
 import { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
+import Header from 'components/form/Header';
 
 class Request extends Component {
   componentDidMount() {
@@ -11,114 +12,78 @@ class Request extends Component {
     return (
       <Fragment>
         <DefaultLayout>
-            <div className="login100-form-title">
-              <span className="login100-form-title-1">
-                Sign In
-              </span>
-            </div>
-            <div className="login100-form validate-form">
-              <div className="wrap-input100 validate-input m-b-26" data-validate="Username is required"
-              style={{borderBottom: 'none'}} >
-                <span className="label-input100">ประเภทสัตว์เลี้ยง</span>
-                <div className="contact100-form-checkbox">
-                  <input className="input-checkbox100" id="ckb1" type="checkbox" name="dog" />
-                  <label className="label-checkbox100" htmlFor="ckb1">
+          <Header title="Order" />
+          <div className="login100-form row">
+            <div className="form-group col-sm-12">
+              <label> ประเภทสัตว์เลี้ยง</label>
+              <div className="col-sm-6">
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" id="dog"/>
+                  <label className="form-check-label" for="gridCheck1">
                     สุนัข
                   </label>
                 </div>
-                <br />
-                <div className="contact100-form-checkbox">
-                  <input className="input-checkbox100" id="ckb1" type="checkbox" name="cat" />
-                  <label className="label-checkbox100" htmlFor="ckb1">
+              </div>
+              <div className="col-sm-6">
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" id="cat"/>
+                  <label className="form-check-label" for="gridCheck2">
                     แมว
                   </label>
                 </div>
-                
               </div>
-              
-              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                <span className="label-input100">จำนวนสัตว์เลี้ยง</span>
-                <input className="input100" type="number" name="qty" placeholder="" />
-                <span className="focus-input100" />
-              </div>
+            </div>
 
-              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                <span className="label-input100">ขนาดสัตว์เลี้ยง</span>
-                <input className="input100" type="number" name="qty" placeholder="" />
-                <span className="focus-input100" />
-              </div>
+            <div className="form-group col-sm-12">
+              <label>จำนวนสัตว์เลี้ยง</label>
+              <input type="number" name="quantity" value="1" min="1" max="5" step="1" />
+            </div>
 
-              <div className="wrap-input100 validate-input m-b-18" style={{borderBottom: 'none'}}>
-                <input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
-                <label className="label-checkbox100" htmlFor="ckb1">
+            <div className="form-group col-sm-12">
+              <label>ขนาดสัตว์เลี้ยง</label>
+              <input type="" className="form-control" id="exampleInputPassword1" placeholder="" />
+            </div>
+
+            <div className="form-group col-sm-12">
+              <div className="col-sm-6">
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" id="cat"/>
+                  <label className="form-check-label" for="gridCheck2">
                   เจ้าของไปด้วย
-                </label>
-              </div>
-
-              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                <span className="label-input100">ต้นทาง</span>
-                <input className="input100" type="number" name="qty" placeholder="" />
-                <span className="focus-input100" />
-              </div>
-
-              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                <span className="label-input100">ปลายทาง</span>
-                <input className="input100" type="number" name="qty" placeholder="" />
-                <span className="focus-input100" />
-              </div>
-
-              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                <span className="label-input100">วันที่</span>
-                <input className="input100" type="number" name="qty" placeholder="" />
-                <span className="focus-input100" />
-              </div>
-
-              <div className="wrap-input100 validate-input m-b-26" data-validate="Username is required"
-              style={{borderBottom: 'none'}} >
-                <span className="label-input100">ช่องทางการชำระเงิน</span>
-                <div className="contact100-form-checkbox">
-                  <input className="input-checkbox100" id="ckb1" type="checkbox" name="dog" />
-                  <label className="label-checkbox100" htmlFor="ckb1">
-                    Line Pay
-                  </label>
-                </div>
-                <br />
-                <div className="contact100-form-checkbox">
-                  <input className="input-checkbox100" id="ckb1" type="checkbox" name="cat" />
-                  <label className="label-checkbox100" htmlFor="ckb1">
-                    เงินสด
                   </label>
                 </div>
               </div>
+            </div>
 
-              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                <span className="label-input100">เบอร์ติดต่อ</span>
-                <input className="input100" type="number" name="tel" placeholder="กรอกเบอร์ติดต่อ" />
-                <span className="focus-input100" />
-              </div>
+            <div className="form-group col-sm-12">
+              <label>ต้นทาง</label>
+              <input type="" className="form-control" id="exampleInputPassword1" placeholder="" />
+            </div>
 
+            <div className="form-group col-sm-12">
+              <label>ปลายทาง</label>
+              <input type="" className="form-control" id="exampleInputPassword1" placeholder="" />
+            </div>
 
-              {/* <div className="flex-sb-m w-full p-b-30">
-                <div className="contact100-form-checkbox">
-                  <input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
-                  <label className="label-checkbox100" htmlFor="ckb1">
-                    Remember me
-                  </label>
-                </div>
-                <div>
-                  <a href="#" className="txt1">
-                    Forgot Password?
-                  </a>
-                </div>
-              </div> */}
+            <div className="form-group col-sm-12">
+              <label>วันที่</label>
+              <input type="" className="form-control" id="exampleInputPassword1" placeholder="" />
+            </div>
 
+            <div className="form-group col-sm-12">
+              <label>ช่องทางการชำระเงิน</label>
+              <input type="" className="form-control" id="exampleInputPassword1" placeholder="" />
+            </div>
 
+            <div className="form-group col-sm-12">
               <div className="container-login100-form-btn">
                 <button className="login100-form-btn">
                   Login
                 </button>
               </div>
             </div>
+
+          </div>
         </DefaultLayout>
       </Fragment>
     )
