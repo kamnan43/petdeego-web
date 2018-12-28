@@ -24,7 +24,8 @@ class Register extends Component {
     const liffHelper = require('../../src/utils/Liffhelper');
     let profile = await liffHelper.default.getProfile()
     console.log("======== profile", profile);
-    let user = await this.props.driver.getUser(profile.userId);
+    await this.props.driver.getUser(profile.userId);
+    let user = this.props.driver.data;
     console.log("======== user", user);
     if (user) {
       this.setState({
