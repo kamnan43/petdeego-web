@@ -1,5 +1,5 @@
 import NextHead from 'next/head'
-import { string } from 'prop-types' 
+import { string } from 'prop-types'
 
 const defaultDescription = ''
 const defaultOGURL = ''
@@ -37,11 +37,13 @@ const Head = (props) => (
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Kanit:200,300,300i,400,400i,500,600,600i,700,700i,800|Prompt" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Quicksand:700,300|Montserrat" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800" rel="stylesheet" />
     {/* <!-- Stylesheets --> */}
     <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/static/assets/css/plugins.css" />
-	
+    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-bdMzz1onLPXl-XDMePprOdvHFju6QhA&v=3.exp&libraries=geometry,places&language=th"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vConsole/3.2.0/vconsole.min.js" />
   </NextHead>
 )
 
