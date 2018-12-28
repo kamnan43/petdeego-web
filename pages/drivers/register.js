@@ -25,27 +25,30 @@ class Register extends Component {
     liffHelper.default.getProfile()
       .then(profile => {
         // console.log("======== profile", profile);
-        this.setState({ userId: profile.userId })
+        let user = await this.props.driver.getUser(profile.userId);
+        this.setState({
+          userId: profile.userId,
+          name: user.name,
+          tel: profile.tel,
+        });
       });
   }
 
   // BUTTON EVENT
   gotoSave = async () => {
-    try {
-      let driver = {
-        user_id: this.state.userId,
-        name: this.state.name,
-        tel: this.state.tel,
-        isDog: this.state.isDog,
-        isCat: this.state.isCat,
-        isOther: this.state.isOther,
-        hasCage: this.state.hasCage,
-      };
-      await this.props.driver.saveData(driver);
-      liffHelper.closeWindow();
-    } catch (err) {
-      // this.refs.noti.error(err.message, getText(keys.component.failed));
-    }
+    let driver = {
+      user_id: this.state.userId,
+      name: this.state.name,
+      tel: this.state.tel,
+      isDog: this.state.isDog,
+      isCat: this.state.isCat,
+      isOther: this.state.isOther,
+      hasCage: this.state.hasCage,
+    };
+    await this.props.driver.saveData(driver);
+
+    const liffHelper = require('../../src/utils/Liffhelper');
+    liffHelper.closeWindow();
   }
 
   render() {
