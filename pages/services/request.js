@@ -21,7 +21,6 @@ class Request extends Component {
     const type = this.props.service.toJS().data.pet_type;
     const found = type.find(val => val === 'dog');
     if (found) {
-
     } else {
 
     }
