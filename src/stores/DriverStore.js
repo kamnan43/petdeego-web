@@ -6,14 +6,14 @@ class DriverStore extends BaseStore {
   constructor() {
     super();
     this.observable({
-      data: {},
+      data: undefined,
       isLoading: false,
       error: '',
     });
   }
 
   async resetData() {
-    this.data = {};
+    this.data = undefined;
     this.isLoading = false;
     this.error = '';
   }
@@ -26,7 +26,7 @@ class DriverStore extends BaseStore {
       let response = await http.get(url);
       if (response.statusCode === 200) {
         this.data = response;
-      } else this.data = {};
+      } else this.data = undefined;
     } catch (err) {
       this.error = err.message;
     } finally {
