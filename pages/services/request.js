@@ -4,7 +4,7 @@ import NextHead from 'next/head';
 import dynamic from 'next/dynamic';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import Header from 'components/form/Header';
-import { isolateGlobalState } from 'mobx/lib/internal';
+// import { isolateGlobalState } from 'mobx/lib/internal';
 
 const GMapPicker = dynamic(import('../../components/mappicker/GMapPicker'), {
   ssr: false
