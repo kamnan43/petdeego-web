@@ -13,11 +13,11 @@ class HomePage extends Component {
         <div className="login100-form row">
           <form className="col-md">
             <div className="form-group">
-              <label htmlFor="exampleInputEmail1 p-b-18">Email address</label>
+              <label>Email address</label>
               <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleInputPassword1 p-b-18">Password</label>
+              <label>Password</label>
               <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
             </div>
             <div className="form-group">
