@@ -1,0 +1,19 @@
+.no__header {
+  height: 70px;
+}
+
+:global {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    clear: both;
+    line-height: 1.3;
+    font-family: 'Kanit', sans-serif;
+  }
+  .ql-editor p {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  }
+}

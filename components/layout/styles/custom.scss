@@ -1,0 +1,62 @@
+@import './styles/variables';
+
+.fullscreen {
+  min-height: 75vh;
+}
+
+/*===============================================================================
+      [ Menu ]
+================================================================================= */
+
+.mainmenu__nav .meninmenu li a {
+  font-size: 15px;
+}
+
+.mainmenu__nav .meninmenu li a:hover {
+  color: $main-color;
+}
+
+/*===============================================================================
+      [ Footer ]
+================================================================================= */
+.ft__logo__img {
+  width: 62px;
+  border-radius: 50px;
+}
+
+.footer-static-top {
+  padding: 7vh 0 2vh;
+}
+
+.copy__right__inner {
+  padding-top: 10px;
+}
+
+.social__net li {
+  margin-right: 0px;
+}
+
+/*===============================================================================
+      [ Banner ]
+================================================================================= */
+.slider__content {
+  margin-top: 0px;
+}
+
+/*===============================================================================
+      [ Content ]
+================================================================================= */
+.blog-details .blog-post-details .post-thumbnail>img {
+  width: 100%;
+}
+
+.blog-details .blog-post-details .post_wrapper .post_content p {
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 400;
+}
+
+.blog-details .blog-post-details .post_wrapper .post_header .post_author li {
+  font-size: 14px;
+  font-weight: 600;
+}

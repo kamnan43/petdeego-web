@@ -1,0 +1,10 @@
+.vscode
+.cache
+.nyc_output
+node_modules
+build
+coverage
+test.js
+*.tar.gz
+.idea
+.next
