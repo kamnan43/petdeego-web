@@ -9,9 +9,11 @@ const defaultData = {
     name: '',
     phone: '',
   },
+  type_dog: false,
+  type_cat: false,
   pet_type: [],
   qty: 1,
-  sizes: ['s', 'M'],
+  sizes: '',
   owner: true | false,
   source: {
     address: '',
@@ -23,9 +25,9 @@ const defaultData = {
     lat: '',
     lng: '',
   },
-  date: '',
+  date: undefined,
   time: '',
-  payment: "line | cash",
+  payment: "cash",
   created: '',
   status: '',
 }
@@ -48,17 +50,30 @@ class HomeStore extends BaseStore {
   setCustomer(customer) {
     this.data.customer = customer;
   }
-
-  changeAddPetType(type) {
-    this.data.pet_type.push(type);
+  
+  setData(key, value){
+    const data = this.toJS().data;
+    _.set(data, key, value);
+    this.data = data;
   }
 
-  changeRemovePetType(type) {
-    this.data.pet_type = type;
+  changePetType(type) {
+    const data = this.toJS().data;
+    switch (type) {
+      case 'dog':
+        this.data.type_dog = !data.type_dog;
+        break;
+      case 'cat':
+        this.data.type_cat = !data.type_cat;
+        break;
+      default:
+        break;
+    }
   }
 
-  changeQty(qty) {
-    this.data.qty = qty;
+  async submit() {
+    const data = this.toJS().data;
+    console.log('data', data);
   }
 
   changeSourcePosition(position) {
@@ -69,20 +84,6 @@ class HomeStore extends BaseStore {
   changeDestinationPosition(position) {
     this.data.destination.lat = position.lat;
     this.data.destination.lng = position.lng;
-  }
-
-  async getData(homeId) {
-    this.loading = true;
-    let url = `${process.env.CMS_API_URL}/v1/layouts/${homeId}`;
-    let response = await http.get(url);
-    if (response.statusCode === 200) {
-      let data = response.body.data;
-      delete data.data;
-      this.data = data;
-    } else {
-      this.data = [];
-    }
-    this.loading = false;
   }
 }
 

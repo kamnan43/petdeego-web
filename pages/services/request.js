@@ -23,19 +23,21 @@ class Request extends Component {
       });
   }
 
-  checkDog(event) {
-    const type = this.props.service.toJS().data.pet_type;
-    const found = type.find(val => val === 'dog');
-    if (found) {
-    } else {
+  // onSourceLocationChange(e) {
+  //   this.setVal('source', {
+  //     address: e.address,
+  //     lat: e.position.lat,
+  //     lng: e.position.lng
+  //   });
+  // }
 
-    }
-    console.log('event', event.target.value);
-  }
-
-  checkCat(event) {
-    console.log('event', event.target.value);
-  }
+  // onDestinationLocationChange(e) {
+  //   this.setVal('destination', {
+  //     address: e.address,
+  //     lat: e.position.lat,
+  //     lng: e.position.lng
+  //   })
+  // }
 
   onSourceLocationChange(e) {
     if (e.position) {
@@ -49,15 +51,21 @@ class Request extends Component {
     }
   }
 
-  setQty() {
+  changePetType(type) {
+    this.props.service.changePetType(type);
+  }
 
+  setVal = (key, val) => {
+    this.props.service.setData(key, val);
+  }
+
+  onSubmit = () => {
+    this.props.service.submit();
+    // console.log(this.props.service.toJS().data);
   }
 
   render() {
     const service = this.props.service.toJS().data;
-    const cat = service.pet_type.find(val => val === 'cat');
-    const dog = service.pet_type.find(val => val === 'dog');
-
     return (
       <Fragment>
         <NextHead>
@@ -70,80 +78,105 @@ class Request extends Component {
               <label> ประเภทสัตว์เลี้ยง</label>
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="dog" onClick={this.checkDog.bind(this)} checked={dog} />
-                  <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" id="dog" onClick={this.changePetType.bind(this, 'dog')} value={service.type_dog} />
+                  <label className="form-check-label" for="dog">
                     สุนัข
                   </label>
                 </div>
               </div>
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="cat" onClick={this.checkCat.bind(this)} checked={cat} />
-                  <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" id="cat" onClick={this.changePetType.bind(this, 'cat')} value={service.type_cat} />
+                  <label className="form-check-label" for="cat">
                     แมว
                   </label>
                 </div>
               </div>
             </div>
 
-            <div className="form-group col-sm-12">
-              <label>จำนวนสัตว์เลี้ยง</label>
-              <input type="text" className="form-control" id="qty" placeholder="" />
-            </div>
+              <div className="form-group col-sm-12">
+                <label>จำนวนสัตว์เลี้ยง</label>
+                <input type="number" className="form-control" id="qty" placeholder="" onChange={e => {
+                  this.setVal('qty', +e.target.value)
+                }} />
+              </div>
 
-            <div className="form-group col-sm-12">
-              <label>ขนาดสัตว์เลี้ยง</label>
-              <input type="" className="form-control" id="exampleInputPassword1" placeholder="" />
-            </div>
+              <div className="form-group col-sm-12">
+                <label>ขนาดสัตว์เลี้ยง</label>
+                <input type="text" className="form-control" id="exampleInputPassword1" placeholder="S, M, L, XL"
+                  onChange={e => {
+                    this.setVal('sizes', e.target.value)
+                  }} />
+              </div>
 
-            <div className="form-group col-sm-12">
-              <div className="col-sm-6">
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="cat" />
-                  <label className="form-check-label">
-                    เจ้าของไปด้วย
+              <div className="form-group col-sm-12">
+                <div className="col-sm-6">
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" id="owner"
+                      onChange={e => {
+                        this.setVal('owner', e.target.checked)
+                      }} />
+                    <label className="form-check-label" for="owner">
+                      เจ้าของไปด้วย
                   </label>
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-group col-sm-12">
+                <label>ต้นทาง</label>
+                <input type="text" className="form-control" id="sourceAddress" onChange={
+                  e => {
+                    this.setVal('source.address', e.target.value)
+                  }
+                } />
+              </div>
+
+              <div className="form-group col-sm-12">
+                <label>ปลายทาง</label>
+                <input type="text" className="form-control" id="destinationAddress" onChange={
+                  e => {
+                    this.setVal('destination.address', e.target.value)
+                  }
+                } />
+              </div>
+
+              <div className="form-group col-sm-12">
+                <label>วันที่</label>
+                <input type="date" className="form-control" id="date" onChange={e => {
+                  this.setVal('date', new Date(e.target.value))
+                }} />
+              </div>
+
+              <div className="form-group col-sm-12">
+                <label>ช่องทางการชำระเงิน</label>
+                <div className="radio">
+                  <label>
+                    <input type="radio" name="optradio" style={{ margin: '5px' }} value={'line'} checked={service.payment === 'line'} onChange={e => { this.setVal('payment', e.target.value) }} />
+                    Line Pay
+                </label>
+                </div>
+                <div className="radio">
+                  <label><input type="radio" name="optradio" style={{ margin: '5px' }} value={'cash'} checked={service.payment === 'cash'} onChange={e => { this.setVal('payment', e.target.value) }} /> เงินสด</label>
+                </div>
+              </div>
+
+              <div className="form-group col-sm-12">
+                <label>เบอร์โทร</label>
+                <input type="text" className="form-control" id="customer_phone" placeholder="" onChange={e => {
+                  this.setVal('customer.phone', +e.target.value)
+                }} />
+              </div>
+
+              <div className="form-group col-sm-12">
+                <div className="container-login100-form-btn">
+                  <button className="login100-form-btn" onClick={this.onSubmit}>
+                    Submit
+                </button>
                 </div>
               </div>
             </div>
-
-            <div className="form-group col-sm-12">
-              <label>ต้นทาง</label>
-              <input type="" className="form-control" id="exampleInputPassword1" placeholder="" />
-            </div>
-
-            <div className="form-group col-sm-12">
-              <label>ปลายทาง</label>
-              <input type="" className="form-control" id="exampleInputPassword1" placeholder="" />
-            </div>
-
-            <div className="form-group col-sm-12">
-              <label>วันที่</label>
-              <input type="date" className="form-control" id="date" />
-            </div>
-
-            <div className="form-group col-sm-12">
-              <label>ช่องทางการชำระเงิน</label>
-              <div className="radio">
-                <label>
-                  <input type="radio" name="optradio" style={{margin: '5px'}} checked={'line'} />
-                  Line Pay
-                </label>
-              </div>
-              <div className="radio">
-                <label><input type="radio" name="optradio" style={{margin: '5px'}} checked={'cash'} /> เงินสด</label>
-              </div>
-
-            </div>
-
-            <div className="form-group col-sm-12">
-              <div className="container-login100-form-btn">
-                <button className="login100-form-btn">
-                  Login
-                </button>
-              </div>
-            </div>
-          </div>
+          
         </DefaultLayout>
       </Fragment>
     )
