@@ -25,13 +25,9 @@ class DriverStore extends BaseStore {
       let url = `${process.env.API_URL}/v1/driver`;
       console.log("======== driver:", driver);
       let response = await http.post(url, { json: driver });
-      if (response.statusCode === 200) {
-        let { data } = response.body;
-        console.log("======== data:", data);
-      } else {
-        throw new Error('cannot save.');
-      }
+      console.log("======== response:", response);
     } catch (err) {
+      console.log("======== err.message:", err.message);
       this.error = err.message;
     } finally {
       this.loading = false;

@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { observer, inject } from 'mobx-react';
 
 import DefaultLayout from 'components/layout/DefaultLayout';
@@ -24,7 +24,7 @@ class Register extends Component {
     const liffHelper = require('../../src/utils/Liffhelper');
     liffHelper.default.getProfile()
       .then(profile => {
-        console.log("======== profile", profile);
+        // console.log("======== profile", profile);
         this.setState({ userId: profile.userId })
       });
   }
@@ -32,7 +32,6 @@ class Register extends Component {
   // BUTTON EVENT
   gotoSave = async () => {
     try {
-      console.log("======== gotoSave");
       let driver = {
         user_id: this.state.userId,
         name: this.state.name,
@@ -43,22 +42,11 @@ class Register extends Component {
         hasCage: this.state.hasCage,
       };
       await this.props.driver.saveData(driver);
-      if (!this.props.driver.error) {
-        // this.refs.noti.success(getText(keys.channel.msgBodySuccess), getText(keys.component.complete));
-        // history.push('/channel');
-      } else {
-        // this.refs.noti.error(this.props.channel.error, getText(keys.component.failed));
-      }
+      liffHelper.closeWindow();
     } catch (err) {
       // this.refs.noti.error(err.message, getText(keys.component.failed));
     }
   }
-
-  gotoCancel = () => {
-    console.log("======== gotoCancel");
-    // history.push('/channel');
-  }
-
 
   render() {
     return (
