@@ -47,14 +47,12 @@ class QuotationStore extends BaseStore {
     this.loading = true;
     let quotation = this.toJS();
     let url = `${process.env.API_URL}/v1/quotation`;
-    let json = {
-      data: {
-        user_id: quotation.driver.userId,
-        price: quotation.price,
-        order_id: quotation.orderId,
-      }
+    let data = {
+      user_id: quotation.driver.userId,
+      price: quotation.price,
+      order_id: quotation.orderId,
     }
-    let response = await http.post(url, json);
+    let response = await http.post(url, { json: data });
     if (response.statusCode === 200) {
       let data = response.body;
       this.data = data;
