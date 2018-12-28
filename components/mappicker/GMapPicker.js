@@ -58,6 +58,7 @@ export class GMapPicker extends Component {
       mapElement,
       zoom,
       radius,
+      showCurrentLocationButton
     } = this.props;
 
     containerElement = containerElement || defaultOptions.containerElement;
@@ -70,14 +71,20 @@ export class GMapPicker extends Component {
     if (this.state.useCurrentLocation) {
       lat = this.state.defaultLat;
       lng = this.state.defaultLng;
+    } else {
+      lat = this.state.lat;
+      lng = this.state.lng;
     }
 
     return (
       <Fragment>
-        <button
-          type="button"
-          className="btn btn-outline-primary"
-          onClick={this.handleCurrentLocation.bind(this)}>ตำแหน่งปัจจุบัน</button>
+        {
+          showCurrentLocationButton &&
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={this.handleCurrentLocation.bind(this)}>ตำแหน่งปัจจุบัน</button>
+        }
         <LocationPicker
           disabled={disabled}
           containerElement={containerElement}
