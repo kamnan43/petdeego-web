@@ -7,18 +7,41 @@ import Header from 'components/form/Header';
 
 class Quotation extends Component {
   componentWillMount() {
-    if (this.props.router && this.props.router.order_id) {
-      const orderId = this.props.router.order_id;
-      this.props.quotation.getData(orderId);
+    
+  }
+  async componentDidMount() {
+    require('../../src/utils/VConsole');
+    const liffHelper = require('../../src/utils/Liffhelper');
+    liffHelper.default.getProfile()
+      .then(profile => {
+        this.props.quotation.setDriver(profile);
+      });
+
+    if (this.props.router && this.props.router.query && this.props.router.query.order_id) {
+      const orderId = this.props.router.query.order_id;
+      await this.props.quotation.getData('2222222', orderId);
     }
   }
-  componentDidMount() {
-    
+
+  onPriceChange(event) {
+    this.props.quotation.setPrice(event.target.value);
+  }
+
+  onSubmit() {
+    this.props.quotation.submit();
+  }
+
+  isEmpty(obj) {
+    for(var key in obj) {
+      if(obj.hasOwnProperty(key))
+        return false;
+    }
+    return true;
   }
 
   render() {
     let quotation = this.props.quotation.toJS();
-    if (quotation.data) {
+    if (!this.isEmpty(quotation.data)) {
       return (
         <DefaultLayout>
           <Header title="คุณได้เสนอราคาไปแล้ว" />
@@ -40,14 +63,14 @@ class Quotation extends Component {
         <DefaultLayout>
           <Header title="เสนอราคา" />
           <div className="login100-form  row">
-            <form className="col-md-12">
+            <form className="col-md-12" onSubmit={false}>
               <div className="form-group">
                 <label htmlFor="price">Price</label>
-                <input type="email" className="form-control" id="price" placeholder="0.00" />
+                <input type="number" className="form-control" onChange={this.onPriceChange.bind(this)} id="price" placeholder="0.00" />
               </div>
               <div className="form-group">
                 <div className="container-login100-form-btn">
-                  <button className="login100-form-btn">
+                  <button type="button" className="login100-form-btn" onClick={this.onSubmit.bind(this)}>
                     Submit
                   </button>
                 </div>
