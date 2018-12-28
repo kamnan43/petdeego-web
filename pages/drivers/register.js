@@ -23,15 +23,14 @@ class Register extends Component {
     require('../../src/utils/VConsole');
     const liffHelper = require('../../src/utils/Liffhelper');
     let profile = await liffHelper.default.getProfile()
-    console.log("======== profile", profile);
     await this.props.driver.getUser(profile.userId);
     let user = this.props.driver.data;
-    console.log("======== user", user);
     if (user) {
       this.setState({
         isOldUser: true,
+        userId: profile.userId,
         name: user.name,
-        tel: profile.tel,
+        tel: user.tel,
       });
     } else {
       this.setState({
