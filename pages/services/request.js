@@ -8,6 +8,8 @@ class Request extends Component {
 
   }
 
+  
+
   render() {
     return (
       <Fragment>
@@ -18,16 +20,16 @@ class Request extends Component {
               <label> ประเภทสัตว์เลี้ยง</label>
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="dog"/>
-                  <label className="form-check-label" for="gridCheck1">
+                  <input className="form-check-input" type="checkbox" id="dog" />
+                  <label className="form-check-label">
                     สุนัข
                   </label>
                 </div>
               </div>
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="cat"/>
-                  <label className="form-check-label" for="gridCheck2">
+                  <input className="form-check-input" type="checkbox" id="cat" />
+                  <label className="form-check-label">
                     แมว
                   </label>
                 </div>
@@ -47,9 +49,9 @@ class Request extends Component {
             <div className="form-group col-sm-12">
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="cat"/>
-                  <label className="form-check-label" for="gridCheck2">
-                  เจ้าของไปด้วย
+                  <input className="form-check-input" type="checkbox" id="cat" />
+                  <label className="form-check-label">
+                    เจ้าของไปด้วย
                   </label>
                 </div>
               </div>
@@ -90,4 +92,4 @@ class Request extends Component {
   }
 }
 
-export default inject('home')(observer(Request));
+export default inject('services')(observer(Request));
