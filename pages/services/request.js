@@ -43,6 +43,9 @@ class Request extends Component {
   onDestinationLocationChange(e) {
     console.log('destination location -> ', e);
   }
+  setQty() {
+    
+  }
 
   render() {
     const service = this.props.service.toJS().data;
@@ -76,24 +79,6 @@ class Request extends Component {
                 </div>
               </div>
 
-              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                <span className="label-input100">จำนวนสัตว์เลี้ยง</span>
-                <input className="input100" type="number" name="qty" placeholder="" />
-                <span className="focus-input100" />
-              </div>
-
-              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                <span className="label-input100">ขนาดสัตว์เลี้ยง</span>
-                <input className="input100" type="number" name="qty" placeholder="" />
-                <span className="focus-input100" />
-              </div>
-
-              <div className="wrap-input100 validate-input m-b-18" style={{borderBottom: 'none'}}>
-                <input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
-                <label className="label-checkbox100" htmlFor="ckb1">
-                  เจ้าของไปด้วย
-                </label>
-              </div>
 
               <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
                 <span className="label-input100">ต้นทาง</span>
@@ -119,9 +104,9 @@ class Request extends Component {
             </div>
 
             <div className="form-group col-sm-12">
-              <label>จำนวนสัตว์เลี้ยง</label>
-              <input type="number" name="quantity" value="1" min="1" max="5" step="1" />
-            </div>
+               <label>จำนวนสัตว์เลี้ยง</label>
+               <input type="text" className="form-control" id="qty" placeholder="" />
+              </div>
 
             <div className="form-group col-sm-12">
               <label>ขนาดสัตว์เลี้ยง</label>
@@ -151,12 +136,21 @@ class Request extends Component {
 
             <div className="form-group col-sm-12">
               <label>วันที่</label>
-              <input type="" className="form-control" id="exampleInputPassword1" placeholder="" />
+              <input type="date" className="form-control" id="date" />
             </div>
 
             <div className="form-group col-sm-12">
               <label>ช่องทางการชำระเงิน</label>
-              <input type="" className="form-control" id="exampleInputPassword1" placeholder="" />
+              <div className="radio">
+                <label>
+                  <input type="radio" name="optradio" style={{margin: '5px'}} checked={'line'} />
+                  Line Pay
+                </label>
+              </div>
+              <div className="radio">
+                <label><input type="radio" name="optradio" style={{margin: '5px'}} checked={'cash'} /> เงินสด</label>
+              </div>
+
             </div>
 
             <div className="form-group col-sm-12">
