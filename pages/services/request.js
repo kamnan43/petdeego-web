@@ -1,15 +1,33 @@
 import { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react';
+import NextHead from 'next/head';
+import dynamic from 'next/dynamic';
 import DefaultLayout from '../../components/layout/DefaultLayout';
+const GMapPicker = dynamic(import('../../components/mappicker/GMapPicker'), {
+  ssr: false
+})
+
+const API_KEY = 'AIzaSyBs77oWyIEnm2pD2LiwCVA6YRv-0_Rjgjs';
 
 class Request extends Component {
   componentDidMount() {
 
   }
 
+  onSourceLocationChange(e) {
+    console.log('source location -> ', e);
+  }
+
+  onDestinationLocationChange(e) {
+    console.log('destination location -> ', e);
+  }
+
   render() {
     return (
       <Fragment>
+        <NextHead>
+          <script src={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,places&language=th`}></script>
+        </NextHead>
         <DefaultLayout>
             <div className="login100-form-title">
               <span className="login100-form-title-1">
@@ -33,9 +51,8 @@ class Request extends Component {
                     แมว
                   </label>
                 </div>
-                
               </div>
-              
+
               <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
                 <span className="label-input100">จำนวนสัตว์เลี้ยง</span>
                 <input className="input100" type="number" name="qty" placeholder="" />
@@ -59,12 +76,22 @@ class Request extends Component {
                 <span className="label-input100">ต้นทาง</span>
                 <input className="input100" type="number" name="qty" placeholder="" />
                 <span className="focus-input100" />
+                <GMapPicker
+                  mapElement={<div style={ {height: '250px'} } />}
+                  onChange={this.onSourceLocationChange.bind(this)}
+                  showCurrentLocationButton
+                />
               </div>
 
               <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
                 <span className="label-input100">ปลายทาง</span>
                 <input className="input100" type="number" name="qty" placeholder="" />
                 <span className="focus-input100" />
+                <GMapPicker
+                  mapElement={<div style={ {height: '250px'} } />}
+                  onChange={this.onDestinationLocationChange.bind(this)}
+                  showCurrentLocationButton
+                />
               </div>
 
               <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
