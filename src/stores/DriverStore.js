@@ -35,7 +35,6 @@ class DriverStore extends BaseStore {
   }
 
   async saveData(driver) {
-    console.log("======== saveData:", driver);
     this.loading = true;
     this.error = '';
     try {
@@ -44,9 +43,7 @@ class DriverStore extends BaseStore {
       } else {
         await http.put(`${process.env.API_URL}/v1/driver/${driver.user_id}`, { json: driver });
       }
-      console.log("======== success");
     } catch (err) {
-      console.log("======== err.message:", err.message);
       this.error = err.message;
     } finally {
       this.loading = false;
