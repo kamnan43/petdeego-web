@@ -118,7 +118,7 @@ class Request extends Component {
 
   render() {
     const service = this.props.service.toJS().data;
-    const date = datetime.moment(service.date).format('DD/MM/YYYY LT')
+    const date = datetime.moment(service.date).format('DD/MM/YYYY HH:mm')
     return (
       <Fragment>
         <NextHead>
@@ -196,7 +196,7 @@ class Request extends Component {
 
             <div className="form-group col-sm-12">
               <label>วันที่</label>
-              <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' onChange={e => {
+              <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' onChange={e => {
                   this.setVal('date', e.format())
                 }} />
               {/* <input type="date" className="form-control"
