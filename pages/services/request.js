@@ -2,6 +2,7 @@ import { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react';
 import NextHead from 'next/head';
 import dynamic from 'next/dynamic';
+import swal from 'sweetalert2';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import Header from 'components/form/Header';
 // import { isolateGlobalState } from 'mobx/lib/internal';
@@ -59,9 +60,50 @@ class Request extends Component {
     this.props.service.setData(key, val);
   }
 
-  onSubmit = () => {
-    this.props.service.submit();
-    // console.log(this.props.service.toJS().data);
+  onSubmit = async () => {
+
+    let confirmDialogOptions = {
+      title: 'กรุณายืนยันการส่งข้อมูล',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ยืนยัน',
+      cancelButtonText: 'ยกเลิก',
+      showLoaderOnConfirm: true,
+      preConfirm: async () => {
+        try {
+          await this.props.service.submit();
+        } catch (error) {
+          swal({
+            type: 'error',
+            title: error.message,
+            confirmButtonText: 'ตกลง',
+          });
+          return false;
+        }
+      },
+      allowOutsideClick: () => !swal.isLoading(),
+    };
+
+    let result = await swal(confirmDialogOptions);
+    if (result.value) {
+      swal({
+        title: 'บันทึกข้อมูลเรียบร้อย',
+        type: 'success',
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+
+    // try {
+    //   this.props.service.submit();
+    //   setTimeout(() => {
+    //     window.location.reload();
+    //   }, 1000);
+    // } catch (error) {
+    //   alert(error.message);
+    // }
   }
 
   render() {
@@ -176,7 +218,7 @@ class Request extends Component {
                 </div>
               </div>
             </div>
-          
+
         </DefaultLayout>
       </Fragment>
     )

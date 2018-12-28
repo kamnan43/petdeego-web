@@ -50,7 +50,7 @@ class HomeStore extends BaseStore {
   setCustomer(customer) {
     this.data.customer = customer;
   }
-  
+
   setData(key, value){
     const data = this.toJS().data;
     _.set(data, key, value);
@@ -72,8 +72,19 @@ class HomeStore extends BaseStore {
   }
 
   async submit() {
-    const data = this.toJS().data;
-    console.log('data', data);
+    this.loading = true;
+    try {
+      const data = this.toJS().data;
+      const res = await http.post(`${process.env.API_URL}/v1/order`, {
+        json: data,
+      });
+      console.log('submit response -> ', res);
+    } catch (error) {
+      console.log('submit error -> ', error);
+      throw error;
+    } finally {
+      this.loading = false;
+    }
   }
 
   changeSourcePosition(position) {
