@@ -17,26 +17,88 @@ class Request extends Component {
               </span>
             </div>
             <div className="login100-form validate-form">
-              <div className="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+              <div className="wrap-input100 validate-input m-b-26" data-validate="Username is required"
+              style={{borderBottom: 'none'}} >
                 <span className="label-input100">ประเภทสัตว์เลี้ยง</span>
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
-                <label className="form-check-label" for="inlineCheckbox1">สุนัข</label>
+                <div className="contact100-form-checkbox">
+                  <input className="input-checkbox100" id="ckb1" type="checkbox" name="dog" />
+                  <label className="label-checkbox100" htmlFor="ckb1">
+                    สุนัข
+                  </label>
+                </div>
+                <br />
+                <div className="contact100-form-checkbox">
+                  <input className="input-checkbox100" id="ckb1" type="checkbox" name="cat" />
+                  <label className="label-checkbox100" htmlFor="ckb1">
+                    แมว
+                  </label>
+                </div>
+                
               </div>
-              <br />
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-                <label className="form-check-label" for="inlineCheckbox2">แมว</label>
-              </div>
-                {/* <input className="input100" type="text" name="type" placeholder="กรอก" /> */}
-                <span className="focus-input100" />
-              </div>
+              
               <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
                 <span className="label-input100">จำนวนสัตว์เลี้ยง</span>
-                <input className="input100" type="number" name="qty" placeholder="Enter password" />
+                <input className="input100" type="number" name="qty" placeholder="" />
                 <span className="focus-input100" />
               </div>
-              <div className="flex-sb-m w-full p-b-30">
+
+              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                <span className="label-input100">ขนาดสัตว์เลี้ยง</span>
+                <input className="input100" type="number" name="qty" placeholder="" />
+                <span className="focus-input100" />
+              </div>
+
+              <div className="wrap-input100 validate-input m-b-18" style={{borderBottom: 'none'}}>
+                <input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
+                <label className="label-checkbox100" htmlFor="ckb1">
+                  เจ้าของไปด้วย
+                </label>
+              </div>
+
+              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                <span className="label-input100">ต้นทาง</span>
+                <input className="input100" type="number" name="qty" placeholder="" />
+                <span className="focus-input100" />
+              </div>
+
+              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                <span className="label-input100">ปลายทาง</span>
+                <input className="input100" type="number" name="qty" placeholder="" />
+                <span className="focus-input100" />
+              </div>
+
+              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                <span className="label-input100">วันที่</span>
+                <input className="input100" type="number" name="qty" placeholder="" />
+                <span className="focus-input100" />
+              </div>
+
+              <div className="wrap-input100 validate-input m-b-26" data-validate="Username is required"
+              style={{borderBottom: 'none'}} >
+                <span className="label-input100">ช่องทางการชำระเงิน</span>
+                <div className="contact100-form-checkbox">
+                  <input className="input-checkbox100" id="ckb1" type="checkbox" name="dog" />
+                  <label className="label-checkbox100" htmlFor="ckb1">
+                    Line Pay
+                  </label>
+                </div>
+                <br />
+                <div className="contact100-form-checkbox">
+                  <input className="input-checkbox100" id="ckb1" type="checkbox" name="cat" />
+                  <label className="label-checkbox100" htmlFor="ckb1">
+                    เงินสด
+                  </label>
+                </div>
+              </div>
+
+              <div className="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                <span className="label-input100">เบอร์ติดต่อ</span>
+                <input className="input100" type="number" name="tel" placeholder="กรอกเบอร์ติดต่อ" />
+                <span className="focus-input100" />
+              </div>
+
+
+              {/* <div className="flex-sb-m w-full p-b-30">
                 <div className="contact100-form-checkbox">
                   <input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
                   <label className="label-checkbox100" htmlFor="ckb1">
@@ -48,7 +110,9 @@ class Request extends Component {
                     Forgot Password?
                   </a>
                 </div>
-              </div>
+              </div> */}
+
+
               <div className="container-login100-form-btn">
                 <button className="login100-form-btn">
                   Login
