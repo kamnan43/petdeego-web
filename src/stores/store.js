@@ -7,5 +7,5 @@ export default {
   home,
   content,
   quotation,
-  services,
+  service,
 }

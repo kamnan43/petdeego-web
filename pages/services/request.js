@@ -8,9 +8,17 @@ class Request extends Component {
 
   }
 
-  
+  checkDog(event) {
+    console.log('event', event.target.value);
+  }
+
+  checkCat(event) {
+    console.log('event', event.target.value);
+  }
+
 
   render() {
+    const service = this.service.toJS(); 
     return (
       <Fragment>
         <DefaultLayout>
@@ -20,7 +28,7 @@ class Request extends Component {
               <label> ประเภทสัตว์เลี้ยง</label>
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="dog" />
+                  <input className="form-check-input" type="checkbox" id="dog" onClick={this.checkDog.bind(this)} />
                   <label className="form-check-label">
                     สุนัข
                   </label>
@@ -28,7 +36,7 @@ class Request extends Component {
               </div>
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="cat" />
+                  <input className="form-check-input" type="checkbox" id="cat" onClick={this.checkCat.bind(this)} />
                   <label className="form-check-label">
                     แมว
                   </label>
