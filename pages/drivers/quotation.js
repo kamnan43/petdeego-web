@@ -51,9 +51,7 @@ class Quotation extends Component {
             <form className="col-md-12">
               <div className="form-group">
                 <div className="container-login100-form-btn">
-                  <button className="login100-form-btn" onClick={() => { liffHelper.closeWindow() }}>
-                    ปิด
-                  </button>
+                  <input value="ปิด" name="close" className="login100-form-btn" onClick={() => { liffHelper.closeWindow() }} />
                 </div>
               </div>
             </form>
