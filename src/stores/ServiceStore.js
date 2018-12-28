@@ -75,7 +75,8 @@ class HomeStore extends BaseStore {
   async submit() {
     this.loading = true;
     try {
-      const data = this.toJS().data;
+      let data = this.toJS().data;
+      data.pet_type = [(data.type_dog) ? 'dog' : false, (data.type_cat) ? 'cat' : false].filter(val => val);
       const res = await http.post(`${process.env.API_URL}/v1/order`, {
         json: data,
       });
