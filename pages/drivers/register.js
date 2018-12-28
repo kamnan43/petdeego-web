@@ -25,6 +25,7 @@ class Register extends Component {
     let profile = await liffHelper.default.getProfile()
     console.log("======== profile", profile);
     let user = await this.props.driver.getUser(profile.userId);
+    console.log("======== user", user);
     if (user) {
       this.setState({
         isOldUser: true,
@@ -54,7 +55,7 @@ class Register extends Component {
     await this.props.driver.saveData(driver);
 
     const liffHelper = require('../../src/utils/Liffhelper');
-    liffHelper.closeWindow();
+    liffHelper.default.closeWindow();
   }
 
   render() {
