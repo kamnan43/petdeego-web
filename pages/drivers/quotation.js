@@ -18,8 +18,10 @@ class Quotation extends Component {
       });
 
     if (this.props.router && this.props.router.query && this.props.router.query.order_id) {
+      let quotation = this.props.quotation.toJS();
       const orderId = this.props.router.query.order_id;
-      await this.props.quotation.getData('2222222', orderId);
+      this.props.quotation.setOrderId(orderId);
+      await this.props.quotation.getData(quotation.driver.userId, orderId);
     }
   }
 

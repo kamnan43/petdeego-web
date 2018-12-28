@@ -8,6 +8,7 @@ class QuotationStore extends BaseStore {
     this.observable({
       loading: false,
       data: {},
+      orderId: null,
       price: 0,
       driver: {},
     });
@@ -15,6 +16,10 @@ class QuotationStore extends BaseStore {
 
   async resetData() {
     this.data = [];
+  }
+
+  async setOrderId(orderId) {
+    this.orderId = orderId;
   }
 
   async setDriver(driver) {
@@ -40,12 +45,13 @@ class QuotationStore extends BaseStore {
 
   async submit() {
     this.loading = true;
+    let quotation = this.toJS();
     let url = `${process.env.API_URL}/v1/quotation`;
     let json = {
       data: {
-        user_id: '2222222',
-        price: '200',
-        order_id: '12345',
+        user_id: quotation.driver.userId,
+        price: quotation.price,
+        order_id: quotation.orderId,
       }
     }
     let response = await http.post(url, json);
