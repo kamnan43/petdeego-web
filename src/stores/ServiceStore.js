@@ -1,6 +1,7 @@
 import BaseStore from './BaseStore'
 import _ from 'lodash'
 import { http } from '../utils/http';
+import { datetime } from '../utils/datetime';
 
 const defaultData = {
   customer: {
@@ -25,7 +26,7 @@ const defaultData = {
     lat: '',
     lng: '',
   },
-  date: undefined,
+  date: datetime.moment().format(),
   time: '',
   payment: "cash",
   created: '',
