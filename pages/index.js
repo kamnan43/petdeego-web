@@ -1,27 +1,29 @@
-import { Component } from 'react'
+import { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react';
-
-import Button from '@material-ui/core/Button';
-import FilledInput from '@material-ui/core/FilledInput';
-import TextField from '@material-ui/core/TextField';
-
-import DefaultLayout from 'components/layout/DefaultLayout';
-import ContentList from 'components/home/ContentList';
-
-class Index extends Component {
+import DefaultLayout from '../components/layout/DefaultLayout';
+import HomePage from '../components/home/HomePage';
+class Request extends Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
-
+    require('../src/utils/VConsole');
+    const liffHelper = require('../src/utils/Liffhelper');
+    liffHelper.default.getProfile()
+      .then(profile => {
+        console.log(profile);
+      });
   }
 
   render() {
     return (
-      <div>
-        <Button variant="contained" color="primary">
-          Hello World
-        </Button>
-      </div>
+      <Fragment>
+        <DefaultLayout>
+          <HomePage />
+        </DefaultLayout>
+      </Fragment>
     )
   }
 }
 
-export default inject('home')(observer(Index));
+export default inject('home')(observer(Request));

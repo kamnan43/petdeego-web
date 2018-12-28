@@ -1,10 +1,8 @@
 import { Component, Fragment } from 'react'
 
 import Head from './Head';
-import Footer from './Footer';
-import Header from './Header';
 
-import './DefaultLayout.scss';
+import './styles/DefaultLayout.scss';
 
 class DefaultLayout extends Component {
   constructor(props) {
@@ -17,15 +15,12 @@ class DefaultLayout extends Component {
   render() {
     return (
       <Fragment>
-        <Head 
-          title="เรียนภาษาจีนกับเหล่าซืออายะ - AYA Chinese"
-          author="AYA Chinese"
-        />
-        <div className="wrapper" id="wrapper">
-          <Header />
-          {this.props.children}
+        <Head title="" author="" />
+        <div className="container-login100">
+          <div className="wrap-login100">
+            {this.props.children}
+          </div>
         </div>
-        <Footer />
       </Fragment>
     )
   }
