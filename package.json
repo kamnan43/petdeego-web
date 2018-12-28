@@ -49,6 +49,7 @@
     "path": "^0.12.7",
     "popper.js": "^1.14.4",
     "postcss-loader": "^3.0.0",
+    "query-string": "^6.2.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-image-carousel": "^2.0.18",
