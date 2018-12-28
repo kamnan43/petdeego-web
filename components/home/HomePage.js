@@ -10,14 +10,14 @@ class HomePage extends Component {
     return (
       <Fragment>
         <Header title="WELCOME" />
-        <div className="login100-form  row">
-          <form className="col-md-12">
+        <div className="login100-form row">
+          <form className="col-md">
             <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email address</label>
+              <label htmlFor="exampleInputEmail1 p-b-18">Email address</label>
               <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
+              <label htmlFor="exampleInputPassword1 p-b-18">Password</label>
               <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
             </div>
             <div className="form-group">
