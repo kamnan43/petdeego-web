@@ -8,7 +8,6 @@ import Header from 'components/form/Header';
 class Quotation extends Component {
   constructor(props) {
     super(props);
-    this.liffHelper = {};
   }
 
   componentWillMount() {
@@ -16,8 +15,8 @@ class Quotation extends Component {
   }
   async componentDidMount() {
     require('../../src/utils/VConsole');
-    this.liffHelper = require('../../src/utils/Liffhelper');
-    this.liffHelper.default.getProfile()
+    let liffHelper = require('../../src/utils/Liffhelper');
+    liffHelper.default.getProfile()
       .then(async profile => {
         await this.props.quotation.setDriver(profile);
         if (this.props.router && this.props.router.query && this.props.router.query.order_id) {
@@ -45,6 +44,11 @@ class Quotation extends Component {
     return true;
   }
 
+  closeLiff() {
+    let liffHelper = require('../../src/utils/Liffhelper');
+    liffHelper.default.closeWindow();
+  }
+
   render() {
     let quotation = this.props.quotation.toJS();
     if (!this.isEmpty(quotation.data)) {
@@ -55,7 +59,7 @@ class Quotation extends Component {
             <form className="col-md-12">
               <div className="form-group">
                 <div className="container-login100-form-btn">
-                  <input value="ปิด" type="button" name="close" className="login100-form-btn" onClick={() => { this.liffHelper.closeWindow() }} />
+                  <input value="ปิด" type="button" name="close" className="login100-form-btn" onClick={() => { this.closeLiff(); }} />
                 </div>
               </div>
             </form>
