@@ -6,7 +6,12 @@ import Header from 'components/form/Header';
 
 class Request extends Component {
   componentDidMount() {
-
+    require('../../src/utils/VConsole');
+    const liffHelper = require('../../src/utils/Liffhelper');
+    liffHelper.default.getProfile()
+      .then(profile => {
+        console.log(profile);
+      });
   }
 
   checkDog(event) {
@@ -38,7 +43,7 @@ class Request extends Component {
               <label> ประเภทสัตว์เลี้ยง</label>
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="dog" onClick={this.checkDog.bind(this)} checked={dog}/>
+                  <input className="form-check-input" type="checkbox" id="dog" onClick={this.checkDog.bind(this)} checked={dog} />
                   <label className="form-check-label">
                     สุนัข
                   </label>
@@ -46,7 +51,7 @@ class Request extends Component {
               </div>
               <div className="col-sm-6">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="cat" onClick={this.checkCat.bind(this)} checked={cat}/>
+                  <input className="form-check-input" type="checkbox" id="cat" onClick={this.checkCat.bind(this)} checked={cat} />
                   <label className="form-check-label">
                     แมว
                   </label>
