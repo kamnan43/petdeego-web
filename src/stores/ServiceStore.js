@@ -9,7 +9,7 @@ const defaultData = {
     name: '',
     phone: '',
   },
-  pet_type: '',
+  pet_type: [],
   qty: 1,
   sizes: ['s', 'M'],
   owner: true | false,
@@ -43,6 +43,14 @@ class HomeStore extends BaseStore {
 
   async resetData() {
     this.data = [];
+  }
+
+  changePetType(type) {
+    this.data.pet_type = type;
+  }
+
+  changeQty(qty) {
+    this.data.qty = qty;
   }
 
   async getData(homeId) {
