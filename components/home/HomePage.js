@@ -10,7 +10,7 @@ class HomePage extends Component {
       <Fragment>
         <div className="login100-form-title" style={{ backgroundImage: 'url(/static/assets/images/petdeego/bg.jpg)' }}>
           <span className="login100-form-title-1">
-            Sign In
+            Hello
               </span>
         </div>
         <form className="login100-form validate-form">

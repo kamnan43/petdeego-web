@@ -515,9 +515,16 @@ input.input100 {
   opacity: 1;
 }
 
+.petdee-logo {
+  width: 10vh;
+}
+
 @media (max-width: 992px) {
   .alert-validate::before {
     visibility: visible;
     opacity: 1;
+  }
+  .container-login100{
+    min-height: auto;
   }
 }
