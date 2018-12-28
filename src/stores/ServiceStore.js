@@ -45,6 +45,10 @@ class HomeStore extends BaseStore {
     this.data = [];
   }
 
+  setCustomer(customer) {
+    this.data.customer = customer;
+  }
+
   changeAddPetType(type) {
     this.data.pet_type.push(type);
   }

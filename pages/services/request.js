@@ -18,6 +18,7 @@ class Request extends Component {
     const liffHelper = require('../../src/utils/Liffhelper');
     liffHelper.default.getProfile()
       .then(profile => {
+        this.props.service.setCustomer(profile);
         console.log(profile);
       });
   }
