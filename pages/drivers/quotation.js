@@ -82,7 +82,7 @@ class Quotation extends Component {
             <div className="form-group col-sm-12 nopadding">
               <label className="label-input100" htmlFor="price">ราคา</label>
               <input type="number" className="form-control input100" onChange={this.onPriceChange.bind(this)} id="price" placeholder="0.00" />
-              <span class="focus-input100"></span>
+              <span className="focus-input100"></span>
             </div>
             <div className="form-group col-sm-12 nopadding m-b-26 m-t-26">
               <div className="container-login100-form-btn justify-content-center">

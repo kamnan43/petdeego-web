@@ -152,7 +152,7 @@ class Request extends Component {
               <input type="number" className="form-control input100" id="qty" placeholder="" value="1" onChange={e => {
                 this.setVal('qty', +e.target.value)
               }} />
-              <span class="focus-input100"></span>
+              <span className="focus-input100"></span>
             </div>
 
             <div className="form-group col-sm-12 nopadding m-b-26">
@@ -161,7 +161,7 @@ class Request extends Component {
                 onChange={e => {
                   this.setVal('sizes', e.target.value)
                 }} />
-              <span class="focus-input100"></span>
+              <span className="focus-input100"></span>
             </div>
 
             <div className="form-group col-sm-12 nopadding m-b-26">
@@ -186,7 +186,7 @@ class Request extends Component {
                   this.setVal('source.address', e.target.value)
                 }
               } />
-              <span class="focus-input100"></span>
+              <span className="focus-input100"></span>
             </div>
 
             <div className="form-group col-sm-12 nopadding m-b-26">
@@ -196,7 +196,7 @@ class Request extends Component {
                   this.setVal('destination.address', e.target.value)
                 }
               } />
-              <span class="focus-input100"></span>
+              <span className="focus-input100"></span>
             </div>
 
             <div className="form-group col-sm-12 nopadding m-b-26">
@@ -204,7 +204,7 @@ class Request extends Component {
               <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' inputProps={{ className: "form-control input100" }} onChange={e => {
                 this.setVal('date', e.format())
               }} />
-              <span class="focus-input100"></span>
+              <span className="focus-input100"></span>
               {/* <input type="date" className="form-control"
                 id="date" value={service.date} value={date} onChange={e => {
                   this.setVal('date', new Date(e.target.value))
@@ -227,7 +227,7 @@ class Request extends Component {
               <input type="text" className="form-control input100" id="customer_phone" placeholder="" onChange={e => {
                 this.setVal('customer.phone', +e.target.value)
               }} />
-              <span class="focus-input100"></span>
+              <span className="focus-input100"></span>
             </div>
 
             <div className="form-group col-sm-12 nopadding m-b-26 m-t-26">

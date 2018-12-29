@@ -94,7 +94,7 @@ class Register extends Component {
                 placeholder=""
                 value={this.state.name}
                 onChange={event => this.setState({ name: event.target.value })} />
-              <span class="focus-input100"></span>
+              <span className="focus-input100"></span>
             </div>
             <div className="form-group">
               <label className="label-input100">เบอร์ติดต่อ :</label>
@@ -102,7 +102,7 @@ class Register extends Component {
                 placeholder=""
                 value={this.state.tel}
                 onChange={event => this.setState({ tel: event.target.value })} />
-              <span class="focus-input100"></span>
+              <span className="focus-input100"></span>
             </div>
             <div className="form-group custom-checkbox m-b-40">
               <label className="label-input100 p-b-10">ประเภทสัตว์เลี้ยงที่รับ :</label>
