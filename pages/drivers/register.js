@@ -96,7 +96,7 @@ class Register extends Component {
                 onChange={event => this.setState({ tel: event.target.value })} />
             </div>
             <div className="form-group custom-checkbox">
-              <label>ประเภทสัตว์เลี้ยง :</label>
+              <label>ประเภทสัตว์เลี้ยงที่รับ :</label>
               <input type="checkbox" id="chkDog" checked={this.state.isDog} onChange={event => this.setState({ isDog: event.target.checked })} /> &nbsp;สุนัข
               &nbsp;&nbsp;&nbsp;
               <input type="checkbox" id="chkCat" checked={this.state.isCat} onChange={event => this.setState({ isCat: event.target.checked })} /> &nbsp;แมว
