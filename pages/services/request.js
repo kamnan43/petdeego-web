@@ -138,15 +138,11 @@ class Request extends Component {
               <div className="col-sm-6 nopadding">
                 <div className="contact100-form-checkbox">
                   <input className="form-check-input input-checkbox100" id="dog" type="checkbox" name="dog" onClick={this.changePetType.bind(this, 'dog')} value={service.type_dog} />
-                  <label className="form-check-label label-checkbox100" htmlFor="dog">
-                    สุนัข
-                  </label>
+                  <label className="form-check-label label-checkbox100" htmlFor="dog">สุนัข</label>
                 </div>
                 <div className="contact100-form-checkbox">
                   <input className="form-check-input input-checkbox100" id="cat" type="checkbox" name="cat" onClick={this.changePetType.bind(this, 'cat')} value={service.type_cat} />
-                  <label className="form-check-label label-checkbox100" htmlFor="cat">
-                    แมว
-                  </label>
+                  <label className="form-check-label label-checkbox100" htmlFor="cat">แมว</label>
                 </div>
               </div>
             </div>

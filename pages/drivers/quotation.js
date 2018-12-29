@@ -66,7 +66,7 @@ class Quotation extends Component {
           <div className="login100-form  row">
             <form className="col-md-12">
               <div className="form-group">
-                <div className="container-login100-form-btn">
+                <div className="container-login100-form-btn justify-content-center">
                   <input value="ปิด" type="button" name="close" className="login100-form-btn" onClick={() => { this.closeLiff(); }} />
                 </div>
               </div>
@@ -78,18 +78,17 @@ class Quotation extends Component {
       return (
         <DefaultLayout>
           <Header title="เสนอราคา" />
-          <div className="login100-form  row">
-            <form className="col-md-12">
-              <div className="form-group">
-                <label htmlFor="price">ราคา</label>
-                <input type="number" className="form-control" onChange={this.onPriceChange.bind(this)} id="price" placeholder="0.00" />
+          <div className="login100-form row">
+            <div className="form-group col-sm-12 nopadding">
+              <label className="label-input100" htmlFor="price">ราคา</label>
+              <input type="number" className="form-control input100" onChange={this.onPriceChange.bind(this)} id="price" placeholder="0.00" />
+              <span class="focus-input100"></span>
+            </div>
+            <div className="form-group col-sm-12 nopadding m-b-26 m-t-26">
+              <div className="container-login100-form-btn justify-content-center">
+                <input value="Submit" type="button" className="login100-form-btn" onClick={this.onSubmit.bind(this)} />
               </div>
-              <div className="form-group">
-                <div className="container-login100-form-btn">
-                  <input value="Submit" type="button" className="login100-form-btn" onClick={this.onSubmit.bind(this)} />
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
         </DefaultLayout>
       )

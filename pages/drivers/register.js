@@ -87,28 +87,29 @@ class Register extends Component {
       <DefaultLayout>
         <Header title="Register Driver" />
         <div className="login100-form row">
-          <form className="col-md">
+          <form className="col-md nopadding">
             <div className="form-group">
-              <label>ชื่อ-นามสกุล :</label>
-              <input type="text" className="form-control" id="txtName"
+              <label className="label-input100">ชื่อ-นามสกุล :</label>
+              <input type="text" className="form-control input100" id="txtName"
                 placeholder=""
                 value={this.state.name}
                 onChange={event => this.setState({ name: event.target.value })} />
+              <span class="focus-input100"></span>
             </div>
             <div className="form-group">
-              <label>เบอร์ติดต่อ :</label>
-              <input type="text" className="form-control" id="txtTel"
+              <label className="label-input100">เบอร์ติดต่อ :</label>
+              <input type="text" className="form-control input100" id="txtTel"
                 placeholder=""
                 value={this.state.tel}
                 onChange={event => this.setState({ tel: event.target.value })} />
+              <span class="focus-input100"></span>
             </div>
-            <div className="form-group custom-checkbox">
-              <label>ประเภทสัตว์เลี้ยงที่รับ :</label>
-              <input type="checkbox" id="chkDog" checked={this.state.isDog} onChange={event => this.setState({ isDog: event.target.checked })} /> &nbsp;สุนัข
-              &nbsp;&nbsp;&nbsp;
-              <input type="checkbox" id="chkCat" checked={this.state.isCat} onChange={event => this.setState({ isCat: event.target.checked })} /> &nbsp;แมว
-              &nbsp;&nbsp;&nbsp;
-              <input type="checkbox" id="chkCat" checked={this.state.isOther} onChange={event => this.setState({ isOther: event.target.checked })} /> &nbsp;อื่นๆ
+            <div className="form-group custom-checkbox m-b-40">
+              <label className="label-input100 p-b-10">ประเภทสัตว์เลี้ยงที่รับ :</label>
+              <input type="checkbox" id="chkDog" className="form-check-input input-checkbox100" checked={this.state.isDog} onChange={event => this.setState({ isDog: event.target.checked })} />
+              <label className="form-check-label label-checkbox100" htmlFor="chkDog">สุนัข</label>
+              <input type="checkbox" id="chkCat" className="form-check-input input-checkbox100" checked={this.state.isCat} onChange={event => this.setState({ isCat: event.target.checked })} />
+              <label className="form-check-label label-checkbox100" htmlFor="chkCat">แมว</label>
             </div>
             <div className="form-group" style={{ textAlign: 'center' }}>
               <input type="checkbox" id="chkCage"
@@ -116,7 +117,7 @@ class Register extends Component {
                 onChange={event => this.setState({ hasCage: event.target.checked })} />
               &nbsp;&nbsp;ต้องมีกรง หรือตะกร้า เท่านั้น
             </div>
-            <div className="form-group">
+            <div className="form-group m-b-26 m-t-26">
               <div className="container-login100-form-btn" style={{ justifyContent: 'center' }}>
                 <input type="button" id="btnSubmit" value="ยืนยัน" className="login100-form-btn" onClick={this.gotoSave} />
               </div>
