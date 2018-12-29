@@ -75,8 +75,8 @@ class Request extends Component {
     let confirmDialogOptions = {
       title: 'กรุณายืนยันการส่งข้อมูล',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#00d5ca',
+      cancelButtonColor: '#ff918e',
       confirmButtonText: 'ยืนยัน',
       cancelButtonText: 'ยกเลิก',
       showLoaderOnConfirm: true,
@@ -134,7 +134,7 @@ class Request extends Component {
           <Header title="Order" />
           <div className="login100-form row">
             <div className="form-group col-sm-12 nopadding m-b-26">
-              <label className="label-input100 p-b-10"> ประเภทสัตว์เลี้ยง</label>
+              <label className="label-input100 p-b-10">ประเภทสัตว์เลี้ยง</label>
               <div className="col-sm-6 nopadding">
                 <div className="contact100-form-checkbox">
                   <input className="form-check-input input-checkbox100" id="dog" type="checkbox" name="dog" onClick={this.changePetType.bind(this, 'dog')} value={service.type_dog} />
