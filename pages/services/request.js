@@ -133,8 +133,8 @@ class Request extends Component {
         <DefaultLayout>
           <Header title="Order" />
           <div className="login100-form row">
-            <div className="form-group col-sm-12">
-              <label> ประเภทสัตว์เลี้ยง</label>
+            <div className="form-group col-sm-12 nopadding m-b-26">
+              <label className="label-input100 p-b-10"> ประเภทสัตว์เลี้ยง</label>
               <div className="col-sm-6 nopadding">
                 <div className="contact100-form-checkbox">
                   <input className="form-check-input input-checkbox100" id="dog" type="checkbox" name="dog" onClick={this.changePetType.bind(this, 'dog')} value={service.type_dog} />
@@ -151,22 +151,24 @@ class Request extends Component {
               </div>
             </div>
 
-            <div className="form-group col-sm-12">
-              <label>จำนวนสัตว์เลี้ยง</label>
-              <input type="number" className="form-control" id="qty" placeholder="" value="1" onChange={e => {
+            <div className="form-group col-sm-12 nopadding m-b-26">
+              <label className="label-input100">จำนวนสัตว์เลี้ยง</label>
+              <input type="number" className="form-control input100" id="qty" placeholder="" value="1" onChange={e => {
                 this.setVal('qty', +e.target.value)
               }} />
+              <span class="focus-input100"></span>
             </div>
 
-            <div className="form-group col-sm-12">
-              <label>ขนาดสัตว์เลี้ยง</label>
-              <input type="text" className="form-control" id="exampleInputPassword1" placeholder="S, M, L, XL"
+            <div className="form-group col-sm-12 nopadding m-b-26">
+              <label className="label-input100">ขนาดสัตว์เลี้ยง</label>
+              <input type="text" className="form-control input100" id="sizes" placeholder="S, M, L, XL"
                 onChange={e => {
                   this.setVal('sizes', e.target.value)
                 }} />
+              <span class="focus-input100"></span>
             </div>
 
-            <div className="form-group col-sm-12">
+            <div className="form-group col-sm-12 nopadding m-b-26">
               <div className="col-sm-6 nopadding">
                 <div className="contact100-form-checkbox">
                   <input className="form-check-input input-checkbox100" id="owner"
@@ -181,57 +183,59 @@ class Request extends Component {
               </div>
             </div>
 
-            <div className="form-group col-sm-12">
-              <label>ต้นทาง</label>
-              <input type="text" className="form-control" id="sourceAddress" onChange={
+            <div className="form-group col-sm-12 nopadding m-b-26">
+              <label className="label-input100">ต้นทาง</label>
+              <input type="text" className="form-control input100" id="sourceAddress" onChange={
                 e => {
                   this.setVal('source.address', e.target.value)
                 }
               } />
+              <span class="focus-input100"></span>
             </div>
 
-            <div className="form-group col-sm-12">
-              <label>ปลายทาง</label>
-              <input type="text" className="form-control" id="destinationAddress" onChange={
+            <div className="form-group col-sm-12 nopadding m-b-26">
+              <label className="label-input100">ปลายทาง</label>
+              <input type="text" className="form-control input100" id="destinationAddress" onChange={
                 e => {
                   this.setVal('destination.address', e.target.value)
                 }
               } />
+              <span class="focus-input100"></span>
             </div>
 
-            <div className="form-group col-sm-12">
-              <label>วันที่</label>
-              <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' onChange={e => {
+            <div className="form-group col-sm-12 nopadding m-b-26">
+              <label className="label-input100">วันที่</label>
+              <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' inputProps={{ className: "form-control input100" }} onChange={e => {
                 this.setVal('date', e.format())
               }} />
+              <span class="focus-input100"></span>
               {/* <input type="date" className="form-control"
                 id="date" value={service.date} value={date} onChange={e => {
                   this.setVal('date', new Date(e.target.value))
                 }} /> */}
             </div>
 
-            <div className="form-group col-sm-12">
-              <label>ช่องทางการชำระเงิน</label>
+            <div className="form-group col-sm-12 nopadding m-b-26">
+              <label className="label-input100 p-b-10">ช่องทางการชำระเงิน</label>
               <div className="radio">
                 <label>
-                  <input type="radio" name="optradio" style={{ margin: '5px' }} value={'line'} checked={service.payment === 'line'} onChange={e => { this.setVal('payment', e.target.value) }} />
-                  Line Pay
-                </label>
+                  <input type="radio" name="optradio" style={{ margin: '5px' }} value={'line'} checked={service.payment === 'line'} onChange={e => { this.setVal('payment', e.target.value) }} /> Line Pay</label>
               </div>
               <div className="radio">
                 <label><input type="radio" name="optradio" style={{ margin: '5px' }} value={'cash'} checked={service.payment === 'cash'} onChange={e => { this.setVal('payment', e.target.value) }} /> เงินสด</label>
               </div>
             </div>
 
-            <div className="form-group col-sm-12">
-              <label>เบอร์โทร</label>
-              <input type="number" className="form-control" id="customer_phone" placeholder="" onChange={e => {
+            <div className="form-group col-sm-12 nopadding m-b-26">
+              <label className="label-input100">เบอร์โทร</label>
+              <input type="text" className="form-control input100" id="customer_phone" placeholder="" onChange={e => {
                 this.setVal('customer.phone', +e.target.value)
               }} />
+              <span class="focus-input100"></span>
             </div>
 
-            <div className="form-group col-sm-12">
-              <div className="container-login100-form-btn">
+            <div className="form-group col-sm-12 nopadding m-b-26 m-t-26">
+              <div className="container-login100-form-btn justify-content-center ">
                 <button className="login100-form-btn" onClick={this.onSubmit}>
                   Submit
                 </button>

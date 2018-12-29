@@ -10,13 +10,14 @@
 body,
 html {
   height: 100%;
-  font-family: Poppins, sans-serif;
+  font-family: Kanit, sans-serif;
+  color: #808080;
 }
 
 /*---------------------------------------------*/
 
 a {
-  font-family: Poppins;
+  font-family: Kanit;
   font-size: 14px;
   line-height: 1.7;
   color: #666666;
@@ -48,7 +49,7 @@ h6 {
 }
 
 p {
-  font-family: Poppins;
+  font-family: Kanit;
   font-size: 14px;
   line-height: 1.7;
   color: #666666;
@@ -85,7 +86,8 @@ textarea {
 }
 
 textarea:focus,
-input:focus {
+input:focus,
+input.form-control.input100:focus {
   border-color: transparent !important;
 }
 
@@ -178,7 +180,7 @@ iframe {
 [ Utility ]*/
 
 .txt1 {
-  font-family: Poppins;
+  font-family: Kanit;
   font-size: 13px;
   line-height: 1.4;
   color: #999999;
@@ -237,7 +239,7 @@ iframe {
 }
 
 .login100-form-title-1 {
-  font-family: Poppins;
+  font-family: Kanit;
   font-weight: bold;
   font-size: 30px;
   color: #fff;
@@ -287,21 +289,25 @@ iframe {
 }
 
 .label-input100 {
-  font-family: Poppins;
-  font-size: 15px;
-  color: #808080;
-  line-height: 1.2;
-  text-align: right;
-  position: absolute;
-  top: 14px;
-  left: -140px;
-  width: 120px;
+  font-family: Kanit, sans-serif;
+  color: #555555;
+  font-weight: 700;
+
+  // line-height: 1.2;
+
+  // font-size: 15px;
+  // line-height: 1.2;
+  // text-align: right;
+  // position: absolute;
+  // top: 14px;
+  // left: -140px;
+  // width: 120px;
 }
 
 /*---------------------------------------------*/
 
 .input100 {
-  font-family: Poppins;
+  font-family: 'Kanit', sans-serif;
   font-size: 15px;
   color: #555555;
   line-height: 1.2;
@@ -329,10 +335,10 @@ iframe {
   left: 0;
   width: 0;
   height: 1px;
-  -webkit-transition: all 0.6s;
-  -o-transition: all 0.6s;
-  -moz-transition: all 0.6s;
-  transition: all 0.6s;
+  // -webkit-transition: all 0.1s;
+  // -o-transition: all 0.1s;
+  // -moz-transition: all 0.1s;
+  // transition: all 0.1s;
   background: #00d5ca;
 }
 
@@ -358,7 +364,7 @@ input.input100 {
 }
 
 .label-checkbox100 {
-  font-family: Poppins;
+  font-family: Kanit;
   // font-size: 13px;
   // color: #999999;
   // line-height: 1.4;
@@ -366,6 +372,7 @@ input.input100 {
   position: relative;
   padding-left: 26px;
   cursor: pointer;
+  margin-left: 5px; 
 }
 
 .label-checkbox100::before {
@@ -425,7 +432,7 @@ input.input100 {
   height: 50px;
   background-color: #00d5ca;
   border-radius: 25px;
-  font-family: Poppins;
+  font-family: Kanit;
   font-size: 16px;
   color: #fff;
   line-height: 1.2;
@@ -485,7 +492,7 @@ input.input100 {
   transform: translateY(-50%);
   right: 2px;
   pointer-events: none;
-  font-family: Poppins-Medium;
+  font-family: Kanit-Medium;
   color: #c80000;
   font-size: 13px;
   line-height: 1.4;
@@ -521,6 +528,16 @@ input.input100 {
 
 .petdee-logo {
   width: 10vh;
+}
+
+input[type="text"].form-control.input100 ,
+input[type="number"].form-control.input100 {
+  border: none;
+  border-bottom: 1px solid #ced4da;
+}
+
+input.form-control.input100 {
+  box-shadow: none;
 }
 
 @media (max-width: 992px) {
