@@ -102,7 +102,13 @@ class Request extends Component {
         type: 'success',
       });
       setTimeout(() => {
-        window.location.reload();
+        const liffHelper = require('../../src/utils/Liffhelper');
+        const message = {
+          type: 'text',
+          text: 'ระบบกำลังนัดหมายรถตามที่คุณต้องการ กรุณารอการตอบกลับจากคนขับ'
+        };
+        liffHelper.default.sendMessages(message);
+        liffHelper.default.closeWindow();
       }, 1000);
     }
 
@@ -163,15 +169,15 @@ class Request extends Component {
             <div className="form-group col-sm-12">
               <div className="col-sm-6 nopadding">
                 <div className="contact100-form-checkbox">
-                    <input className="form-check-input input-checkbox100" id="owner" 
-                      type="checkbox" name="owner" 
-                      onChange={e => {
-                        this.setVal('owner', e.target.checked)
-                      }} />
-                    <label className="form-check-label label-checkbox100" htmlFor="owner">
-                      เจ้าของไปด้วย
+                  <input className="form-check-input input-checkbox100" id="owner"
+                    type="checkbox" name="owner"
+                    onChange={e => {
+                      this.setVal('owner', e.target.checked)
+                    }} />
+                  <label className="form-check-label label-checkbox100" htmlFor="owner">
+                    เจ้าของไปด้วย
                     </label>
-                  </div>
+                </div>
               </div>
             </div>
 
@@ -196,8 +202,8 @@ class Request extends Component {
             <div className="form-group col-sm-12">
               <label>วันที่</label>
               <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' onChange={e => {
-                  this.setVal('date', e.format())
-                }} />
+                this.setVal('date', e.format())
+              }} />
               {/* <input type="date" className="form-control"
                 id="date" value={service.date} value={date} onChange={e => {
                   this.setVal('date', new Date(e.target.value))
