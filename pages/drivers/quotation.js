@@ -32,8 +32,16 @@ class Quotation extends Component {
     this.props.quotation.setPrice(event.target.value);
   }
 
-  onSubmit() {
-    this.props.quotation.submit();
+  async onSubmit() {
+    await this.props.quotation.submit();
+    const quotation = this.props.quotation.toJS();
+    const liffHelper = require('../../src/utils/Liffhelper');
+    const message = {
+      type: 'text',
+      text: `คุณเสนอราคาเรียบร้อยแล้ว (${quotation.price} บาท)`,
+    };
+    liffHelper.default.sendMessages(message);
+    liffHelper.default.closeWindow();
   }
 
   isEmpty(obj) {
@@ -50,7 +58,7 @@ class Quotation extends Component {
   }
 
   render() {
-    let quotation = this.props.quotation.toJS();
+    const quotation = this.props.quotation.toJS();
     if (!this.isEmpty(quotation.data)) {
       return (
         <DefaultLayout>
@@ -73,7 +81,7 @@ class Quotation extends Component {
           <div className="login100-form  row">
             <form className="col-md-12">
               <div className="form-group">
-                <label htmlFor="price">Price</label>
+                <label htmlFor="price">ราคา</label>
                 <input type="number" className="form-control" onChange={this.onPriceChange.bind(this)} id="price" placeholder="0.00" />
               </div>
               <div className="form-group">
