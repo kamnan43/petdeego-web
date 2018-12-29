@@ -29,6 +29,8 @@ class Register extends Component {
       // this catch is to test LIFF on PC
       profile = {
         userId: 'Uaf01b90203e594b4b43a69290acf68d7',
+        displayName: 'หนึ่ง',
+        pictureUrl: 'https://profile.line-scdn.net/0h2IBMKqnRbWZ_NEAT3P8SMUNxYwsIGmsuBwJxV1pnYVFRDC0zEAEqA1g0YQEHBn00RAV2VVxkMldS',
       };
     }
     await this.props.driver.getUser(profile.userId);
