@@ -8,6 +8,7 @@ class Register extends Component {
   state = {
     userId: '',
     name: '',
+    image: '',
     tel: '',
     isDog: false,
     isCat: false,
@@ -40,6 +41,7 @@ class Register extends Component {
         isOldUser: true,
         userId: profile.userId,
         name: user.name,
+        image: profile.pictureUrl,
         tel: user.tel,
         isDog: user.isDog,
         isCat: user.isCat,
@@ -50,6 +52,8 @@ class Register extends Component {
       this.setState({
         isOldUser: false,
         userId: profile.userId,
+        name: user.displayName,
+        image: profile.pictureUrl,
       });
     }
   }
@@ -60,6 +64,7 @@ class Register extends Component {
       isOldUser: this.state.isOldUser,
       user_id: this.state.userId,
       name: this.state.name,
+      image: this.state.image,
       tel: this.state.tel,
       isDog: this.state.isDog,
       isCat: this.state.isCat,
