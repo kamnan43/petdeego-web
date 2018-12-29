@@ -147,7 +147,7 @@ class Request extends Component {
 
             <div className="form-group col-sm-12">
               <label>จำนวนสัตว์เลี้ยง</label>
-              <input type="number" className="form-control" id="qty" placeholder="" onChange={e => {
+              <input type="number" className="form-control" id="qty" placeholder="" value="1" onChange={e => {
                 this.setVal('qty', +e.target.value)
               }} />
             </div>
