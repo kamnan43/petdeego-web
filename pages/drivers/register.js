@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 
 import DefaultLayout from 'components/layout/DefaultLayout';
 import Header from 'components/form/Header';
+import swal from 'sweetalert2';
 
 class Register extends Component {
   state = {
@@ -52,7 +53,7 @@ class Register extends Component {
       this.setState({
         isOldUser: false,
         userId: profile.userId,
-        name: user.displayName,
+        name: profile.displayName,
         image: profile.pictureUrl,
       });
     }
@@ -60,26 +61,56 @@ class Register extends Component {
 
   // BUTTON EVENT
   gotoSave = async () => {
-    let driver = {
-      isOldUser: this.state.isOldUser,
-      user_id: this.state.userId,
-      name: this.state.name,
-      image: this.state.image,
-      tel: this.state.tel,
-      isDog: this.state.isDog,
-      isCat: this.state.isCat,
-      isOther: this.state.isOther,
-      hasCage: this.state.hasCage,
+    let confirmDialogOptions = {
+      title: 'ยืนยันการลงทะเบียน',
+      showCancelButton: true,
+      confirmButtonColor: '#00d5ca',
+      cancelButtonColor: '#ff918e',
+      confirmButtonText: 'ยืนยัน',
+      cancelButtonText: 'ยกเลิก',
+      showLoaderOnConfirm: true,
+      preConfirm: async () => {
+        try {
+          let driver = {
+            isOldUser: this.state.isOldUser,
+            user_id: this.state.userId,
+            name: this.state.name,
+            image: this.state.image,
+            tel: this.state.tel,
+            isDog: this.state.isDog,
+            isCat: this.state.isCat,
+            isOther: this.state.isOther,
+            hasCage: this.state.hasCage,
+          };
+          await this.props.driver.saveData(driver);
+        } catch (error) {
+          swal({
+            type: 'error',
+            title: error.message,
+            confirmButtonText: 'ตกลง',
+          });
+          return false;
+        }
+      },
+      allowOutsideClick: () => !swal.isLoading(),
     };
-    await this.props.driver.saveData(driver);
 
-    const liffHelper = require('../../src/utils/Liffhelper');
-    const message = {
-      type: 'text',
-      text: 'บันทึกข้อมูลเรียบร้อยแล้ว ขอบคุณค่ะ'
-    };
-    liffHelper.default.sendMessages(message);
-    liffHelper.default.closeWindow();
+    let result = await swal(confirmDialogOptions);
+    if (result.value) {
+      swal({
+        title: 'บันทึกข้อมูลเรียบร้อย',
+        type: 'success',
+      });
+      setTimeout(() => {
+        const liffHelper = require('../../src/utils/Liffhelper');
+        const message = {
+          type: 'text',
+          text: 'บันทึกข้อมูลเรียบร้อยแล้ว ขอบคุณค่ะ'
+        };
+        liffHelper.default.sendMessages(message);
+        liffHelper.default.closeWindow();
+      }, 1000);
+    }
   }
 
   render() {
