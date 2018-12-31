@@ -4,6 +4,7 @@ import querystring from 'query-string';
 import DefaultLayout from 'components/layout/DefaultLayout';
 import { withRouter } from 'next/router';
 import Header from 'components/form/Header';
+import swal from 'sweetalert2';
 
 class Quotation extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Quotation extends Component {
   }
 
   componentWillMount() {
-    
+
   }
   async componentDidMount() {
     require('../../src/utils/VConsole');
@@ -33,20 +34,51 @@ class Quotation extends Component {
   }
 
   async onSubmit() {
-    await this.props.quotation.submit();
-    const quotation = this.props.quotation.toJS();
-    const liffHelper = require('../../src/utils/Liffhelper');
-    const message = {
-      type: 'text',
-      text: `คุณเสนอราคาเรียบร้อยแล้ว (${quotation.price} บาท)`,
+    let confirmDialogOptions = {
+      title: 'ยืนยันการเสนอราคา',
+      showCancelButton: true,
+      confirmButtonColor: '#00d5ca',
+      cancelButtonColor: '#ff918e',
+      confirmButtonText: 'ยืนยัน',
+      cancelButtonText: 'ยกเลิก',
+      showLoaderOnConfirm: true,
+      preConfirm: async () => {
+        try {
+          await this.props.quotation.submit();
+        } catch (error) {
+          swal({
+            type: 'error',
+            title: error.message,
+            confirmButtonText: 'ตกลง',
+          });
+          return false;
+        }
+      },
+      allowOutsideClick: () => !swal.isLoading(),
     };
-    liffHelper.default.sendMessages(message);
-    liffHelper.default.closeWindow();
+
+    let result = await swal(confirmDialogOptions);
+    if (result.value) {
+      swal({
+        title: 'บันทึกข้อมูลเรียบร้อย',
+        type: 'success',
+      });
+      setTimeout(() => {
+        const quotation = this.props.quotation.toJS();
+        const liffHelper = require('../../src/utils/Liffhelper');
+        const message = {
+          type: 'text',
+          text: `คุณเสนอราคาเรียบร้อยแล้ว (${quotation.price} บาท)`,
+        };
+        liffHelper.default.sendMessages(message);
+        liffHelper.default.closeWindow();
+      }, 1000);
+    }
   }
 
   isEmpty(obj) {
-    for(var key in obj) {
-      if(obj.hasOwnProperty(key))
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key))
         return false;
     }
     return true;
@@ -65,9 +97,11 @@ class Quotation extends Component {
           <Header title="คุณได้เสนอราคาไปแล้ว" />
           <div className="login100-form  row">
             <form className="col-md-12">
-              <div className="form-group">
-                <div className="container-login100-form-btn justify-content-center">
-                  <input value="ปิด" type="button" name="close" className="login100-form-btn" onClick={() => { this.closeLiff(); }} />
+              <div className="form-group col-sm-12 nopadding m-b-26 m-t-26">
+                <div className="container-login100-form-btn justify-content-center ">
+                  <button className="login100-form-btn" onClick={this.closeLiff()}>
+                    กลับ
+                </button>
                 </div>
               </div>
             </form>
