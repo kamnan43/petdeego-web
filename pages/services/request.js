@@ -7,6 +7,7 @@ import DefaultLayout from '../../components/layout/DefaultLayout';
 import Header from 'components/form/Header';
 import { datetime } from '../../src/utils/datetime';
 import Datetime from 'react-datetime';
+import delay from 'delay';
 
 const GMapPicker = dynamic(import('../../components/mappicker/GMapPicker'), {
   ssr: false
@@ -71,7 +72,6 @@ class Request extends Component {
   }
 
   onSubmit = async () => {
-
     let confirmDialogOptions = {
       title: 'กรุณายืนยันการส่งข้อมูล',
       showCancelButton: true,
@@ -102,15 +102,16 @@ class Request extends Component {
         title: 'บันทึกข้อมูลเรียบร้อย',
         type: 'success',
       });
-      setTimeout(() => {
-        const liffHelper = require('../../src/utils/Liffhelper');
-        const message = {
-          type: 'text',
-          text: 'ระบบกำลังนัดหมายรถตามที่คุณต้องการ กรุณารอการตอบกลับจากคนขับ'
-        };
-        liffHelper.default.sendMessages(message);
-        liffHelper.default.closeWindow();
-      }, 1000);
+      // setTimeout(() => {
+      // }, 1000);
+      await delay(1000);
+      const liffHelper = require('../../src/utils/Liffhelper');
+      const message = {
+        type: 'text',
+        text: 'ระบบกำลังนัดหมายรถตามที่คุณต้องการ กรุณารอการตอบกลับจากคนขับ'
+      };
+      liffHelper.default.sendMessages(message);
+      liffHelper.default.closeWindow();
     }
 
     // try {
