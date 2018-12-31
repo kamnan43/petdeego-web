@@ -15,4 +15,4 @@ class Index extends Component {
   }
 }
 
-export default inject('home')(observer(Index));
+export default Index;

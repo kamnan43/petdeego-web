@@ -1,7 +1,7 @@
 import { Component, Fragment } from 'react'
-import { observer, inject } from 'mobx-react';
 import DefaultLayout from '../components/layout/DefaultLayout';
 import HomePage from '../components/home/HomePage';
+
 class Request extends Component {
   constructor(props) {
     super(props);
@@ -26,4 +26,4 @@ class Request extends Component {
   }
 }
 
-export default inject('home')(observer(Request));
+export default Request;

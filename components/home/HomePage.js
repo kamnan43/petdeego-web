@@ -45,4 +45,4 @@ class HomePage extends Component {
   }
 }
 
-export default inject('home')(observer(HomePage));
+export default HomePage;

@@ -132,7 +132,7 @@ class Request extends Component {
         </NextHead>
         <DefaultLayout>
           <Header title="Order" />
-          <div className="login100-form row">
+          <div className="login100-form p-b-100 row">
             <div className="form-group col-sm-12 nopadding m-b-26">
               <label className="label-input100 p-b-10">ประเภทสัตว์เลี้ยง</label>
               <div className="col-sm-6 nopadding">
