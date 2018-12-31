@@ -201,7 +201,7 @@ class Request extends Component {
 
             <div className="form-group col-sm-12 nopadding m-b-26">
               <label className="label-input100">วันที่</label>
-              <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' inputProps={{ className: "form-control input100" }} onChange={e => {
+              <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' inputProps={{ className: "form-control input100", readOnly: true }} onChange={e => {
                 this.setVal('date', e.format())
               }} />
               <span className="focus-input100"></span>

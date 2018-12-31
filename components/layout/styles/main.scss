@@ -344,6 +344,7 @@ iframe {
   background: #00d5ca;
 }
 
+
 /*---------------------------------------------*/
 
 input.input100 {
@@ -540,6 +541,11 @@ input[type="number"].form-control.input100 {
 
 input.form-control.input100 {
   box-shadow: none;
+}
+
+.form-control.input100[readonly]{
+  background-color: initial;
+    // opacity: 1;
 }
 
 @media (max-width: 992px) {
