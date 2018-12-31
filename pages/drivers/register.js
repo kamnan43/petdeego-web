@@ -142,11 +142,14 @@ class Register extends Component {
               <input type="checkbox" id="chkCat" className="form-check-input input-checkbox100" checked={this.state.isCat} onChange={event => this.setState({ isCat: event.target.checked })} />
               <label className="form-check-label label-checkbox100" htmlFor="chkCat">แมว</label>
             </div>
-            <div className="form-group" style={{ textAlign: 'center' }}>
-              <input type="checkbox" id="chkCage"
+            <div className="form-group m-b-40" style={{ textAlign: 'center', width: 230, margin: 'auto' }}>
+              <input type="checkbox" id="chkCage" checked={this.state.hasCage} className="form-check-input input-checkbox100"
+                onChange={event => this.setState({ hasCage: event.target.checked })} />
+              <label className="form-check-label label-checkbox100" htmlFor="chkCage">ต้องมีกรง หรือตะกร้า เท่านั้น</label>
+              {/* <input type="checkbox" id="chkCage"
                 checked={this.state.hasCage}
                 onChange={event => this.setState({ hasCage: event.target.checked })} />
-              &nbsp;&nbsp;ต้องมีกรง หรือตะกร้า เท่านั้น
+              &nbsp;&nbsp;ต้องมีกรง หรือตะกร้า เท่านั้น */}
             </div>
             <div className="form-group m-b-26 m-t-26">
               <div className="container-login100-form-btn" style={{ justifyContent: 'center' }}>
