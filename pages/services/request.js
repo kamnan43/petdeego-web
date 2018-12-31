@@ -98,6 +98,7 @@ class Request extends Component {
     let result = await swal(confirmDialogOptions);
     if (result.value) {
       swal({
+        confirmButtonColor: '#00d5ca',
         title: 'บันทึกข้อมูลเรียบร้อย',
         type: 'success',
       });
@@ -225,7 +226,7 @@ class Request extends Component {
             <div className="form-group col-sm-12 nopadding m-b-26">
               <label className="label-input100">เบอร์โทร</label>
               <input type="text" className="form-control input100" id="customer_phone" placeholder="" onChange={e => {
-                this.setVal('customer.phone', +e.target.value)
+                this.setVal('customer.phone', e.target.value)
               }} />
               <span className="focus-input100"></span>
             </div>

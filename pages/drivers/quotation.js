@@ -60,6 +60,7 @@ class Quotation extends Component {
     let result = await swal(confirmDialogOptions);
     if (result.value) {
       swal({
+        confirmButtonColor: '#00d5ca',
         title: 'บันทึกข้อมูลเรียบร้อย',
         type: 'success',
       });
