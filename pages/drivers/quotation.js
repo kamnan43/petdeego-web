@@ -34,6 +34,8 @@ class Quotation extends Component {
   }
 
   async onSubmit() {
+    const quotation = this.props.quotation.toJS();
+    let apiResult;
     let confirmDialogOptions = {
       title: 'ยืนยันการเสนอราคา',
       showCancelButton: true,
@@ -44,14 +46,10 @@ class Quotation extends Component {
       showLoaderOnConfirm: true,
       preConfirm: async () => {
         try {
-          await this.props.quotation.submit();
+          apiResult = await this.props.quotation.submit();
+          return apiResult;
         } catch (error) {
-          swal({
-            type: 'error',
-            title: error.message,
-            confirmButtonText: 'ตกลง',
-          });
-          return false;
+          swal.showValidationError(`การบันทึกล้มเหลว ${error.message}`);
         }
       },
       allowOutsideClick: () => !swal.isLoading(),
@@ -63,18 +61,19 @@ class Quotation extends Component {
         confirmButtonColor: '#00d5ca',
         title: 'บันทึกข้อมูลเรียบร้อย',
         type: 'success',
+      }).then(() => {
+        this.sendMessageToUser(quotation).then(this.closeLiff);
       });
-      setTimeout(() => {
-        const quotation = this.props.quotation.toJS();
-        const liffHelper = require('../../src/utils/Liffhelper');
-        const message = {
-          type: 'text',
-          text: `คุณเสนอราคาเรียบร้อยแล้ว (${quotation.price} บาท)`,
-        };
-        liffHelper.default.sendMessages(message);
-        liffHelper.default.closeWindow();
-      }, 1000);
     }
+  }
+
+  sendMessageToUser(quotation) {
+    const liffHelper = require('../../src/utils/Liffhelper');
+    const message = {
+      type: 'text',
+      text: `คุณเสนอราคาเรียบร้อยแล้ว (${quotation.price} บาท)`,
+    };
+    return liffHelper.default.sendMessages(message);
   }
 
   isEmpty(obj) {
@@ -121,7 +120,7 @@ class Quotation extends Component {
             </div>
             <div className="form-group col-sm-12 nopadding m-b-26 m-t-26">
               <div className="container-login100-form-btn justify-content-center">
-                <input value="Submit" type="button" className="login100-form-btn" onClick={this.onSubmit.bind(this)} />
+                <input value="ยืนยัน" type="button" className="login100-form-btn" onClick={this.onSubmit.bind(this)} />
               </div>
             </div>
           </div>
