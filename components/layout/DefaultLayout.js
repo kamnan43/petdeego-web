@@ -1,8 +1,6 @@
 import { Component, Fragment } from 'react'
-
 import Head from './Head';
-
-import './styles/DefaultLayout.scss';
+import './styles/default-layout.scss';
 
 class DefaultLayout extends Component {
   constructor(props) {

@@ -119,22 +119,26 @@ class Register extends Component {
       <DefaultLayout>
         <Header title="Register Driver" />
         <div className="login100-form row">
-          <form className="col-md nopadding">
+          <form className="col-md">
             <div className="form-group">
-              <label className="label-input100">ชื่อ-นามสกุล :</label>
-              <input type="text" className="form-control input100" id="txtName"
-                placeholder=""
-                value={this.state.name}
-                onChange={event => this.setState({ name: event.target.value })} />
-              <span className="focus-input100"></span>
+              <div className="p-relative">
+                <label className="label-input100">ชื่อ-นามสกุล :</label>
+                <input type="text" className="form-control input100" id="txtName"
+                  placeholder=""
+                  value={this.state.name}
+                  onChange={event => this.setState({ name: event.target.value })} />
+                <span className="focus-input100"></span>
+              </div>
             </div>
             <div className="form-group">
-              <label className="label-input100">เบอร์ติดต่อ :</label>
-              <input type="text" className="form-control input100" id="txtTel"
-                placeholder=""
-                value={this.state.tel}
-                onChange={event => this.setState({ tel: event.target.value })} />
-              <span className="focus-input100"></span>
+              <div className="p-relative">
+                <label className="label-input100">เบอร์ติดต่อ :</label>
+                <input type="text" className="form-control input100" id="txtTel"
+                  placeholder=""
+                  value={this.state.tel}
+                  onChange={event => this.setState({ tel: event.target.value })} />
+                <span className="focus-input100"></span>
+              </div>
             </div>
             <div className="form-group custom-checkbox m-b-40">
               <label className="label-input100 p-b-10">ประเภทสัตว์เลี้ยงที่รับ :</label>

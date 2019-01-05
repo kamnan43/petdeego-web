@@ -113,10 +113,12 @@ class Quotation extends Component {
         <DefaultLayout>
           <Header title="เสนอราคา" />
           <div className="login100-form row">
-            <div className="form-group col-sm-12 nopadding">
-              <label className="label-input100" htmlFor="price">ราคา</label>
-              <input type="number" className="form-control input100" onChange={this.onPriceChange.bind(this)} id="price" placeholder="0.00" />
-              <span className="focus-input100"></span>
+            <div className="form-group col-sm-12">
+              <div className="p-relative">
+                <label className="label-input100" htmlFor="price">ราคา</label>
+                <input type="number" className="form-control input100" onChange={this.onPriceChange.bind(this)} id="price" placeholder="0.00" />
+                <span className="focus-input100"></span>
+              </div>
             </div>
             <div className="form-group col-sm-12 nopadding m-b-26 m-t-26">
               <div className="container-login100-form-btn justify-content-center">

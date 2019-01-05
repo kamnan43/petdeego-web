@@ -5,9 +5,12 @@ import dynamic from 'next/dynamic';
 import swal from 'sweetalert2';
 import Datetime from 'react-datetime';
 import delay from 'delay';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import { datetime } from '../../src/utils/datetime';
 import Header from '../../components/form/Header';
+import { datetime } from '../../src/utils/datetime';
+import { relative } from 'path';
 
 const GMapPicker = dynamic(import('../../components/mappicker/GMapPicker'), {
   ssr: false
@@ -147,24 +150,8 @@ class Request extends Component {
         </NextHead>
         <DefaultLayout>
           <Header title="Order" />
-          {this.state.showSourceMapPicker &&
-            <GMapPicker
-              title='เลือกต้นทาง'
-              coords={service.source}
-              address={service.source.address}
-              onSelect={this.onSourceLocationChange.bind(this)}
-              onClose={this.onHideMapLocation.bind(this)} />
-          }
-          {this.state.showDestinationMapPicker &&
-            <GMapPicker
-              title='เลือกปลายทาง'
-              coords={service.destination}
-              address={service.destination.address}
-              onSelect={this.onDestinationLocationChange.bind(this)}
-              onClose={this.onHideMapLocation.bind(this)} />
-          }
           <div className="login100-form p-b-100 row">
-            <div className="form-group col-sm-12 nopadding m-b-26">
+            <div className="form-group col-sm-12 m-b-26">
               <label className="label-input100 p-b-10">ประเภทสัตว์เลี้ยง</label>
               <div className="col-sm-6 nopadding">
                 <div className="contact100-form-checkbox">
@@ -178,24 +165,28 @@ class Request extends Component {
               </div>
             </div>
 
-            <div className="form-group col-sm-12 nopadding m-b-26">
-              <label className="label-input100">จำนวนสัตว์เลี้ยง</label>
-              <input type="number" className="form-control input100" id="qty" placeholder="" onChange={e => {
-                this.setVal('qty', +e.target.value)
-              }} />
-              <span className="focus-input100"></span>
-            </div>
-
-            <div className="form-group col-sm-12 nopadding m-b-26">
-              <label className="label-input100">ขนาดสัตว์เลี้ยง</label>
-              <input type="text" className="form-control input100" id="sizes" placeholder="S, M, L, XL"
-                onChange={e => {
-                  this.setVal('sizes', e.target.value)
+            <div className="form-group col-sm-12 m-b-26">
+              <div className="p-relative">
+                <label className="label-input100">จำนวนสัตว์เลี้ยง</label>
+                <input type="number" className="form-control input100" id="qty" placeholder="" onChange={e => {
+                  this.setVal('qty', +e.target.value)
                 }} />
-              <span className="focus-input100"></span>
+                <span className="focus-input100"></span>
+              </div>
             </div>
 
-            <div className="form-group col-sm-12 nopadding m-b-26">
+            <div className="form-group col-sm-12 m-b-26">
+              <div className="p-relative">
+                <label className="label-input100">ขนาดสัตว์เลี้ยง</label>
+                <input type="text" className="form-control input100" id="sizes" placeholder="S, M, L, XL"
+                  onChange={e => {
+                    this.setVal('sizes', e.target.value)
+                  }} />
+                <span className="focus-input100"></span>
+              </div>
+            </div>
+
+            <div className="form-group col-sm-12 m-b-26">
               <div className="col-sm-6 nopadding">
                 <div className="contact100-form-checkbox">
                   <input className="form-check-input input-checkbox100" id="owner"
@@ -209,27 +200,62 @@ class Request extends Component {
                 </div>
               </div>
             </div>
-            <div className="form-group col-sm-12 nopadding m-b-26">
-              <label className="label-input100">ต้นทาง</label>
-              <input type="text" disabled className="form-control input100" id="sourceAddress" value={service.source.address} />
-              <button className="btn btn-info" onClick={this.onOpenSourceMapPicker.bind(this)}>
-                เลือกจากแผนที่
-                </button>
+          
+            <div className="form-group col-sm-12 m-b-0">
+              <label className="label-input100 p-b-10">ต้นทาง</label>
+              {service.source.address &&
+                <div className="address-text">{service.source.address}</div>
+                // <input type="text" disabled className="form-control input100" id="sourceAddress" value={service.source.address} />
+              }
+              {!this.state.showSourceMapPicker &&
+                <div className="select-address" onClick={this.onOpenSourceMapPicker.bind(this)}>
+                  <FontAwesomeIcon icon="map-marker-alt" /> {(service.source.address) ? 'แก้ไขที่อยู่' : 'เลือกจากแผนที่'}
+                </div>
+              }
               <span className="focus-input100"></span>
             </div>
+            {this.state.showSourceMapPicker &&
+              <div className="form-group col-sm-12 nopadding wrap-address-gmap">
+                <div className="address-gmap">
+                  <GMapPicker
+                    title=''
+                    coords={service.source}
+                    address={service.source.address}
+                    onSelect={this.onSourceLocationChange.bind(this)}
+                    onClose={this.onHideMapLocation.bind(this)} />
+                </div>
+              </div>
+            }
 
-            <div className="form-group col-sm-12 nopadding m-b-26">
-              <label className="label-input100">ปลายทาง</label>
-              <input type="text" disabled className="form-control input100" id="destinationAddress" value={service.destination.address} />
-              <button className="btn btn-info" onClick={this.onOpenDestinationMapPicker.bind(this)}>
-                เลือกจากแผนที่
-                </button>
+            <div className="form-group col-sm-12 m-b-0 m-t-26">
+              <label className="label-input100 p-b-10">ปลายทาง</label>
+              {service.destination.address &&
+                <div className="address-text">{service.destination.address}</div>
+                // <input type="text" disabled className="form-control input100" id="destinationAddress" value={service.destination.address} />
+              }
+              {!this.state.showDestinationMapPicker &&
+                <div className="select-address" onClick={this.onOpenDestinationMapPicker.bind(this)}>
+                  <FontAwesomeIcon icon="map-marker-alt" /> {(service.destination.address) ? 'แก้ไขที่อยู่' : 'เลือกจากแผนที่'}
+                </div>
+              }
               <span className="focus-input100"></span>
             </div>
+            {this.state.showDestinationMapPicker &&
+              <div className="form-group col-sm-12 nopadding wrap-address-gmap ">
+                <div className="address-gmap">
+                  <GMapPicker
+                    title=''
+                    coords={service.destination}
+                    address={service.destination.address}
+                    onSelect={this.onDestinationLocationChange.bind(this)}
+                    onClose={this.onHideMapLocation.bind(this)} />
+                </div>
+              </div>
+            }
 
-            <div className="form-group col-sm-12 nopadding m-b-26">
+            <div className="form-group col-sm-12 m-b-26 m-t-32">
               <label className="label-input100">วันที่</label>
-              <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' inputProps={{ className: "form-control input100", readOnly: true }} onChange={e => {
+              <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' inputProps={{ className: "form-control input100 inputDate100", readOnly: true }} onChange={e => {
                 this.setVal('date', e.format())
               }} />
               <span className="focus-input100"></span>
@@ -239,7 +265,7 @@ class Request extends Component {
                 }} /> */}
             </div>
 
-            <div className="form-group col-sm-12 nopadding m-b-26">
+            <div className="form-group col-sm-12 m-b-26">
               <label className="label-input100 p-b-10">ช่องทางการชำระเงิน</label>
               <div className="radio">
                 <label>
@@ -250,15 +276,17 @@ class Request extends Component {
               </div>
             </div>
 
-            <div className="form-group col-sm-12 nopadding m-b-26">
-              <label className="label-input100">เบอร์โทร</label>
-              <input type="text" className="form-control input100" id="customer_phone" placeholder="" onChange={e => {
-                this.setVal('customer.phone', e.target.value)
-              }} />
-              <span className="focus-input100"></span>
+            <div className="form-group col-sm-12 m-b-26">
+              <div className="p-relative">
+                <label className="label-input100">เบอร์โทร</label>
+                <input type="text" className="form-control input100" id="customer_phone" placeholder="" onChange={e => {
+                  this.setVal('customer.phone', e.target.value)
+                }} />
+                <span className="focus-input100"></span>
+              </div>
             </div>
 
-            <div className="form-group col-sm-12 nopadding m-b-26 m-t-26">
+            <div className="form-group col-sm-12 m-b-26 m-t-26">
               <div className="container-login100-form-btn justify-content-center ">
                 <button className="login100-form-btn" onClick={this.onSubmit}>
                   Submit

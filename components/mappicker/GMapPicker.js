@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import LocationPicker from 'react-location-picker';
 import { geolocated } from 'react-geolocated';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const defaultOptions = {
   containerElement: <div style={{ height: '100%' }} />,
@@ -141,8 +142,8 @@ export class GMapPicker extends Component {
                   : 'suggestion-item';
                 // inline style for demonstration purpose
                 const style = (index % 2 === 0)
-                  ? { backgroundColor: '#ffffcc', cursor: 'pointer' }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                  ? { backgroundColor: '#00d5ca12', cursor: 'pointer', padding: '5px' }
+                  : { backgroundColor: '#ffffff', cursor: 'pointer', padding: '5px' };
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {
@@ -162,36 +163,44 @@ export class GMapPicker extends Component {
 
     return (
       <Fragment>
-        {(!this.props.isGeolocationAvailable || !this.props.isGeolocationEnabled) &&
-          < label className="label-input100">เปิด Location service เพื่อใช้งานตำแหน่งปัจจุบัน</label>
-        }
-        <label className="label-input100">{this.props.title}</label>
-        {
-          this.props.isGeolocationAvailable && this.props.isGeolocationEnabled &&
-          <button
-            type="button"
-            className="btn btn-secondary btn-sm"
-            onClick={this.handleCurrentLocation.bind(this)}>ใช้ตำแหน่งปัจจุบัน</button>
-        }
-        {gPlaceAutoComplete}
-        <LocationPicker
-          disabled={disabled}
-          containerElement={containerElement}
-          mapElement={mapElement}
-          defaultPosition={{
-            lat,
-            lng,
-          }}
-          zoom={zoom}
-          radius={radius}
-          onChange={this.handleLocationChange.bind(this)}
-        />
-        <button className="btn btn-default" onClick={this.props.onClose}>
-          ปิด
-                </button>
-        <button className="btn btn-success" onClick={this.onSelect.bind(this)}>
-          ตกลง
-                </button>
+        <div className="container">
+          <div className="row">
+            <div className="col-xs-12 col-md-12 address-auto-input">
+              {gPlaceAutoComplete}
+            </div>
+            <div className="col-xs-12 col-md-12 p-b-10">
+              {(!this.props.isGeolocationAvailable || !this.props.isGeolocationEnabled) &&
+                < label className="label-input100">เปิด Location service เพื่อใช้งานตำแหน่งปัจจุบัน</label>
+              }
+              <label className="label-input100">{this.props.title}</label>
+              {
+                this.props.isGeolocationAvailable && this.props.isGeolocationEnabled &&
+                <button
+                  type="button"
+                  className="btn100-default btn-current-gmap"
+                  onClick={this.handleCurrentLocation.bind(this)}><FontAwesomeIcon icon="map-pin" /> ใช้ตำแหน่งปัจจุบัน</button>
+              }
+            </div>
+            <div className="col-xs-12 col-md-12 nopadding">
+              <LocationPicker
+                disabled={disabled}
+                containerElement={containerElement}
+                mapElement={mapElement}
+                defaultPosition={{
+                  lat,
+                  lng,
+                }}
+                zoom={zoom}
+                radius={radius}
+                onChange={this.handleLocationChange.bind(this)}
+              />
+            </div>
+            <div className="col-xs-12 col-md-12 text-center p-t-15">
+              <button className="btn100-primary btn-select-gmap" onClick={this.onSelect.bind(this)}><FontAwesomeIcon icon="map-marker-alt" /> เลือกที่อยู่นี้</button>
+              <button className="btn100-default btn-close-gmap" onClick={this.props.onClose}><FontAwesomeIcon icon="times" /> ปิดแผนที่</button>
+            </div>
+          </div>
+        </div>
       </Fragment >
     );
   }
