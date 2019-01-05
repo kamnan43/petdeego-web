@@ -89,14 +89,16 @@ class HomeStore extends BaseStore {
     }
   }
 
-  changeSourcePosition(position) {
+  changeSourcePosition(position, address) {
     this.data.source.lat = position.lat;
     this.data.source.lng = position.lng;
+    this.data.source.address = address;
   }
 
-  changeDestinationPosition(position) {
+  changeDestinationPosition(position, address) {
     this.data.destination.lat = position.lat;
     this.data.destination.lng = position.lng;
+    this.data.destination.address = address;
   }
 }
 

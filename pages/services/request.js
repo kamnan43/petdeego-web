@@ -3,11 +3,11 @@ import { observer, inject } from 'mobx-react';
 import NextHead from 'next/head';
 import dynamic from 'next/dynamic';
 import swal from 'sweetalert2';
-import DefaultLayout from '../../components/layout/DefaultLayout';
-import Header from 'components/form/Header';
-import { datetime } from '../../src/utils/datetime';
 import Datetime from 'react-datetime';
 import delay from 'delay';
+import DefaultLayout from '../../components/layout/DefaultLayout';
+import { datetime } from '../../src/utils/datetime';
+import Header from '../../components/form/Header';
 
 const GMapPicker = dynamic(import('../../components/mappicker/GMapPicker'), {
   ssr: false
@@ -16,6 +16,14 @@ const GMapPicker = dynamic(import('../../components/mappicker/GMapPicker'), {
 const API_KEY = 'AIzaSyBs77oWyIEnm2pD2LiwCVA6YRv-0_Rjgjs';
 
 class Request extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showSourceMapPicker: false,
+      showDestinationMapPicker: false,
+    };
+  }
+
   componentDidMount() {
     require('../../src/utils/VConsole');
     const liffHelper = require('../../src/utils/Liffhelper');
@@ -35,31 +43,36 @@ class Request extends Component {
       });
   }
 
-  // onSourceLocationChange(e) {
-  //   this.setVal('source', {
-  //     address: e.address,
-  //     lat: e.position.lat,
-  //     lng: e.position.lng
-  //   });
-  // }
+  onOpenSourceMapPicker() {
+    this.setState({ showSourceMapPicker: true });
+  }
 
-  // onDestinationLocationChange(e) {
-  //   this.setVal('destination', {
-  //     address: e.address,
-  //     lat: e.position.lat,
-  //     lng: e.position.lng
-  //   })
-  // }
+  onOpenDestinationMapPicker() {
+    this.setState({ showDestinationMapPicker: true });
+  }
+
+  onHideMapLocation() {
+    this.setState({
+      showSourceMapPicker: false,
+      showDestinationMapPicker: false
+    });
+  }
 
   onSourceLocationChange(e) {
+    this.setState({
+      showSourceMapPicker: false,
+    });
     if (e.position) {
-      this.props.service.changeSourcePosition(e.position);
+      this.props.service.changeSourcePosition(e.position, e.address);
     }
   }
 
   onDestinationLocationChange(e) {
+    this.setState({
+      showDestinationMapPicker: false
+    });
     if (e.position) {
-      this.props.service.changeDestinationPosition(e.position);
+      this.props.service.changeDestinationPosition(e.position, e.address);
     }
   }
 
@@ -134,6 +147,22 @@ class Request extends Component {
         </NextHead>
         <DefaultLayout>
           <Header title="Order" />
+          {this.state.showSourceMapPicker &&
+            <GMapPicker
+              title='เลือกต้นทาง'
+              coords={service.source}
+              address={service.source.address}
+              onSelect={this.onSourceLocationChange.bind(this)}
+              onClose={this.onHideMapLocation.bind(this)} />
+          }
+          {this.state.showDestinationMapPicker &&
+            <GMapPicker
+              title='เลือกปลายทาง'
+              coords={service.destination}
+              address={service.destination.address}
+              onSelect={this.onDestinationLocationChange.bind(this)}
+              onClose={this.onHideMapLocation.bind(this)} />
+          }
           <div className="login100-form p-b-100 row">
             <div className="form-group col-sm-12 nopadding m-b-26">
               <label className="label-input100 p-b-10">ประเภทสัตว์เลี้ยง</label>
@@ -180,24 +209,21 @@ class Request extends Component {
                 </div>
               </div>
             </div>
-
             <div className="form-group col-sm-12 nopadding m-b-26">
               <label className="label-input100">ต้นทาง</label>
-              <input type="text" className="form-control input100" id="sourceAddress" onChange={
-                e => {
-                  this.setVal('source.address', e.target.value)
-                }
-              } />
+              <input type="text" disabled className="form-control input100" id="sourceAddress" value={service.source.address} />
+              <button className="btn btn-info" onClick={this.onOpenSourceMapPicker.bind(this)}>
+                เลือกจากแผนที่
+                </button>
               <span className="focus-input100"></span>
             </div>
 
             <div className="form-group col-sm-12 nopadding m-b-26">
               <label className="label-input100">ปลายทาง</label>
-              <input type="text" className="form-control input100" id="destinationAddress" onChange={
-                e => {
-                  this.setVal('destination.address', e.target.value)
-                }
-              } />
+              <input type="text" disabled className="form-control input100" id="destinationAddress" value={service.destination.address} />
+              <button className="btn btn-info" onClick={this.onOpenDestinationMapPicker.bind(this)}>
+                เลือกจากแผนที่
+                </button>
               <span className="focus-input100"></span>
             </div>
 
