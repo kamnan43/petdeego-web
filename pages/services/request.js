@@ -212,7 +212,7 @@ class Request extends Component {
                   <FontAwesomeIcon icon="map-marker-alt" /> {(service.source.address) ? 'แก้ไขที่อยู่' : 'เลือกจากแผนที่'}
                 </div>
               }
-              <span className="focus-input100"></span>
+              {/* <span className="focus-input100"></span> */}
             </div>
             {this.state.showSourceMapPicker &&
               <div className="form-group col-sm-12 nopadding wrap-address-gmap">
@@ -238,7 +238,7 @@ class Request extends Component {
                   <FontAwesomeIcon icon="map-marker-alt" /> {(service.destination.address) ? 'แก้ไขที่อยู่' : 'เลือกจากแผนที่'}
                 </div>
               }
-              <span className="focus-input100"></span>
+              {/* <span className="focus-input100"></span> */}
             </div>
             {this.state.showDestinationMapPicker &&
               <div className="form-group col-sm-12 nopadding wrap-address-gmap ">
