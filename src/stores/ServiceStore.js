@@ -52,6 +52,22 @@ class HomeStore extends BaseStore {
     this.data.customer = customer;
   }
 
+  async getCustomer(lineUserId) {
+    this.loading = true;
+    this.error = '';
+    try {
+      let url = `${process.env.API_URL}/v1/customer/${userId}`;
+      let response = await http.get(url);
+      if (response.statusCode === 200) {
+        this.data = response.body || {};
+      } else this.data = undefined;
+    } catch (err) {
+      this.error = err.message;
+    } finally {
+      this.loading = false;
+    }
+  }
+
   setData(key, value){
     const data = this.toJS().data;
     _.set(data, key, value);
