@@ -279,7 +279,7 @@ class Request extends Component {
             <div className="form-group col-sm-12 m-b-26">
               <div className="p-relative">
                 <label className="label-input100">เบอร์โทร</label>
-                <input type="text" className="form-control input100" id="customer_phone" placeholder="" onChange={e => {
+                <input type="number" className="form-control input100" id="customer_phone" placeholder="" onChange={e => {
                   this.setVal('customer.phone', e.target.value)
                 }} />
                 <span className="focus-input100"></span>
