@@ -1,0 +1,18 @@
+version: '2'
+services:
+  petdee-web:
+    restart: always
+    extends:
+      file: base.yml
+      service: web
+    expose:
+        - 9000
+    environment:
+      NODE_ENV: 'production'
+      VIRTUAL_PORT: 9000
+      VIRTUAL_HOST: 'petdee.alphaem-dev.tech'
+
+networks:
+  default:
+    external:
+      name: sandbox_network
