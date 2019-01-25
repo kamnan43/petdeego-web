@@ -260,11 +260,11 @@ class Request extends Component {
                 }} />
                 <span className="focus-input100"></span> */}
               <div className="form-group col-sm-12 row">
-                <input type="date" className="form-control col-6"
+                <input type="date" className="form-control col-5"
                   id="date" value={service.date} onChange={e => {
                     this.setVal('date', e.target.value)
                   }} />
-                <input type="time" className="form-control col-3"
+                <input type="time" className="form-control col-4"
                   id="time" value={service.time} onChange={e => {
                     this.setVal('time', e.target.value)
                   }} />
