@@ -30,6 +30,7 @@ const defaultData = {
   time: '',
   datetime: '',
   payment: "cash",
+  price: null,
   created: '',
   status: '',
 }
@@ -62,6 +63,23 @@ class HomeStore extends BaseStore {
       if (response.statusCode === 200) {
         this.data = response.body || {};
       } else this.data = undefined;
+    } catch (err) {
+      this.error = err.message;
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  async getPrice() {
+    this.loading = true;
+    this.error = '';
+    const data = this.toJS().data;
+    try {
+      let url = `${process.env.API_URL}/v1/order/calculate/${data.source.lat},${data.source.lng}/${data.destination.lat},${data.destination.lng}`;
+      let response = await http.get(url);
+      if (response.statusCode === 200 && response.body && response.body.result && response.body.result.price) {
+        this.data.price = response.body.result.price;
+      } else this.price = null;
     } catch (err) {
       this.error = err.message;
     } finally {

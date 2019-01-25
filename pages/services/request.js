@@ -67,6 +67,7 @@ class Request extends Component {
     });
     if (e.position) {
       this.props.service.changeSourcePosition(e.position, e.address);
+      this.calculatePrice();
     }
   }
 
@@ -76,11 +77,24 @@ class Request extends Component {
     });
     if (e.position) {
       this.props.service.changeDestinationPosition(e.position, e.address);
+      this.calculatePrice();
+    }
+  }
+
+  calculatePrice() {
+    const service = this.props.service.toJS().data;
+    if (service.source && service.source.lat && service.destination && service.destination.lat) {
+      this.props.service.getPrice();
     }
   }
 
   changePetType(type, e) {
     this.props.service.changePetType(type, e.target.checked);
+  }
+
+  onCallNow() {
+    this.setVal('date', datetime.moment().format('YYYY-MM-DD'));
+    this.setVal('time', datetime.moment().format('HH:ss'));
   }
 
   setVal = (key, val) => {
@@ -239,6 +253,27 @@ class Request extends Component {
               </div>
             </div>
 
+            <div className="form-group col-sm-12 m-b-26 m-t-32">
+              <label className="label-input100">วัน-เวลาที่ต้องการใช้บริการ</label>
+              {/* <Datetime defaultValue={service.date ? date : ''} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' inputProps={{ className: "form-control input100 inputDate100", readOnly: true }} onChange={e => {
+                  this.setVal('date', e.format())
+                }} />
+                <span className="focus-input100"></span> */}
+              <div className="form-group col-sm-12 row">
+                <input type="date" className="form-control col-6"
+                  id="date" value={service.date} onChange={e => {
+                    this.setVal('date', e.target.value)
+                  }} />
+                <input type="time" className="form-control col-3"
+                  id="time" value={service.time} onChange={e => {
+                    this.setVal('time', e.target.value)
+                  }} />
+                <button className="btn btn-sm btn-info col-3" onClick={this.onCallNow.bind(this)}>
+                  เรียกทันที
+                </button>
+              </div>
+            </div>
+
             <div className="form-group col-sm-12 m-b-0">
               <label className="label-input100 p-b-10">ต้นทาง</label>
               {service.source.address &&
@@ -291,27 +326,9 @@ class Request extends Component {
               </div>
             }
 
-            <div className="form-group col-sm-12 m-b-26 m-t-32">
-              <div className="col-sm-6 m-b-13 m-t16">
-                <label className="label-input100">วัน-เวลาที่ต้องการใช้บริการ</label>
-                {/* <Datetime defaultValue={service.date ? date : ''} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' inputProps={{ className: "form-control input100 inputDate100", readOnly: true }} onChange={e => {
-                  this.setVal('date', e.format())
-                }} />
-                <span className="focus-input100"></span> */}
-                <input type="date" className="form-control"
-                  id="date" value={service.date} onChange={e => {
-                    this.setVal('date', e.target.value)
-                  }} />
-                <input type="time" className="form-control"
-                  id="time" value={service.time} onChange={e => {
-                    this.setVal('time', e.target.value)
-                  }} />
-              </div>
-              <div className="col-sm-6 m-b-13 m-t16">
-                <button className="btn btn-sm btn-info" onClick={this.onSubmit}>
-                  เรียกทันที
-                </button>
-              </div>
+            <div className="form-group col-sm-12 m-b-26 m-t-26">
+              <label className="label-input100 p-b-10">ค่าบริการ (คำนวณจากระยะทาง)</label>
+              <label className="label-input100 p-b-10"><b>{service.price ? service.price : 'N/A'} บาท</b></label>
             </div>
 
             <div className="form-group col-sm-12 m-b-26">
