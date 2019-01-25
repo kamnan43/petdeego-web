@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import LocationPicker from 'react-location-picker';
 import { geolocated } from 'react-geolocated';
+import swal from 'sweetalert2';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -27,12 +28,12 @@ export class GMapPicker extends Component {
   }
 
   componentDidMount() {
-    const { coords, address } = this.props;
+    const { coordinated, address } = this.props;
     this.setState({
-      defaultLat: (coords && coords.lat) ? coords.lat : defaultOptions.lat,
-      defaultLng: (coords && coords.lng) ? coords.lng : defaultOptions.lng,
-      lat: (coords && coords.lat) ? coords.lat : defaultOptions.lat,
-      lng: (coords && coords.lng) ? coords.lng : defaultOptions.lng,
+      defaultLat: (coordinated && coordinated.lat) ? coordinated.lat : defaultOptions.lat,
+      defaultLng: (coordinated && coordinated.lng) ? coordinated.lng : defaultOptions.lng,
+      lat: (coordinated && coordinated.lat) ? coordinated.lat : defaultOptions.lat,
+      lng: (coordinated && coordinated.lng) ? coordinated.lng : defaultOptions.lng,
       address: address ? address : defaultOptions.address,
     });
   }
@@ -50,11 +51,31 @@ export class GMapPicker extends Component {
   }
 
   handleCurrentLocation(e) {
-    console.log('this.props.coords', this.props.coords);
+    if (!this.props.isGeolocationAvailable) {
+      swal({
+        title: 'กรุณาเปิด Location Service',
+        type: 'warning',
+      });
+      return;
+    }
+    if (!this.props.isGeolocationEnabled) {
+      swal({
+        title: 'กรุณาเปิด Location Service',
+        type: 'warning',
+      });
+      return;
+    }
+    if (!this.props.coords) {
+      swal({
+        title: 'กรุณาเปิด Location Service หรือรอสักครู่',
+        type: 'warning',
+      });
+      return;
+    }
     this.setState({
       useCurrentLocation: true,
-      lat: this.props.coords.latitude,
-      lng: this.props.coords.longitude,
+      defaultLat: this.props.coords.latitude,
+      defaultLng: this.props.coords.longitude,
     });
   }
 
