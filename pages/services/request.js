@@ -221,7 +221,7 @@ class Request extends Component {
               <div className="p-relative">
                 <label className="label-input100">จำนวนสัตว์เลี้ยง</label>
                 <input type="number" className="form-control input100" id="qty" placeholder="" value={service.qty} onChange={e => {
-                  this.setVal('qty', +e.target.value)
+                  this.setVal('qty', e.target.value)
                 }} />
                 <span className="focus-input100"></span>
               </div>

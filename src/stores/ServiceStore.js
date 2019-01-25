@@ -111,6 +111,7 @@ class HomeStore extends BaseStore {
     try {
       let data = this.toJS().data;
       data.datetime = datetime.momentFormStr(data.date + ' ' + data.time, 'dd/MM/yyyy HH:ss');
+      data.qty = +data.qty;
       data.pet_type = [(data.type_dog) ? 'dog' : false, (data.type_cat) ? 'cat' : false].filter(val => val);
       const res = await http.post(`${process.env.API_URL}/v1/order`, {
         json: data,
