@@ -9,6 +9,10 @@ class DateTime {
     return (date) ? moment(date) : moment();
   }
 
+  momentFormStr(str, format) {
+    return moment(str, format)
+  }
+
   // momentTz(date = '') {
   //   return (date) ? momentTimeZone(date) : momentTimeZone();
   // }

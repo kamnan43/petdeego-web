@@ -3,14 +3,14 @@ import { observer, inject } from 'mobx-react';
 import NextHead from 'next/head';
 import dynamic from 'next/dynamic';
 import swal from 'sweetalert2';
-import Datetime from 'react-datetime';
+// import Datetime from 'react-datetime';
 import delay from 'delay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import Header from '../../components/form/Header';
 import { datetime } from '../../src/utils/datetime';
-import { relative } from 'path';
+// import { relative } from 'path';
 
 const GMapPicker = dynamic(import('../../components/mappicker/GMapPicker'), {
   ssr: false
@@ -79,8 +79,8 @@ class Request extends Component {
     }
   }
 
-  changePetType(type) {
-    this.props.service.changePetType(type);
+  changePetType(type, e) {
+    this.props.service.changePetType(type, e.target.checked);
   }
 
   setVal = (key, val) => {
@@ -88,6 +88,43 @@ class Request extends Component {
   }
 
   onSubmit = async () => {
+    const service = this.props.service.toJS().data;
+
+    if (!service.type_dog && !service.type_cat) {
+      swal({
+        title: 'กรุณาเลือกประเภทสัตว์เลี้ยง',
+        type: 'warning',
+      });
+      return;
+    }
+    if (!service.source.address) {
+      swal({
+        title: 'กรุณาเลือกต้นทาง',
+        type: 'warning',
+      });
+      return;
+    }
+    if (!service.destination.address) {
+      swal({
+        title: 'กรุณาเลือกปลายทาง',
+        type: 'warning',
+      });
+      return;
+    }
+    if (!service.date) {
+      swal({
+        title: 'กรุณาเลือกวัน-เวลาที่ต้องการใช้บริการ',
+        type: 'warning',
+      });
+      return;
+    }
+    if (!service.customer.phone) {
+      swal({
+        title: 'กรุณาระบุเบอร์ติดต่อ',
+        type: 'warning',
+      });
+      return;
+    }
     let confirmDialogOptions = {
       title: 'กรุณายืนยันการส่งข้อมูล',
       showCancelButton: true,
@@ -142,7 +179,8 @@ class Request extends Component {
 
   render() {
     const service = this.props.service.toJS().data;
-    const date = datetime.moment(service.date).format('DD/MM/YYYY HH:mm')
+    // const strDate = datetime.moment(service.date).format('yyyy-MM-dd')
+    // const strTime = datetime.moment(service.date).format('HH:mm')
     return (
       <Fragment>
         <NextHead>
@@ -155,11 +193,11 @@ class Request extends Component {
               <label className="label-input100 p-b-10">ประเภทสัตว์เลี้ยง</label>
               <div className="col-sm-6 nopadding">
                 <div className="contact100-form-checkbox">
-                  <input className="form-check-input input-checkbox100" id="dog" type="checkbox" name="dog" onClick={this.changePetType.bind(this, 'dog')} value={service.type_dog} />
+                  <input className="form-check-input input-checkbox100" id="dog" type="checkbox" name="dog" onChange={this.changePetType.bind(this, 'dog')} checked={service.type_dog} />
                   <label className="form-check-label label-checkbox100" htmlFor="dog">สุนัข</label>
                 </div>
                 <div className="contact100-form-checkbox">
-                  <input className="form-check-input input-checkbox100" id="cat" type="checkbox" name="cat" onClick={this.changePetType.bind(this, 'cat')} value={service.type_cat} />
+                  <input className="form-check-input input-checkbox100" id="cat" type="checkbox" name="cat" onChange={this.changePetType.bind(this, 'cat')} checked={service.type_cat} />
                   <label className="form-check-label label-checkbox100" htmlFor="cat">แมว</label>
                 </div>
               </div>
@@ -168,14 +206,14 @@ class Request extends Component {
             <div className="form-group col-sm-12 m-b-26">
               <div className="p-relative">
                 <label className="label-input100">จำนวนสัตว์เลี้ยง</label>
-                <input type="number" className="form-control input100" id="qty" placeholder="" onChange={e => {
+                <input type="number" className="form-control input100" id="qty" placeholder="" value={service.qty} onChange={e => {
                   this.setVal('qty', +e.target.value)
                 }} />
                 <span className="focus-input100"></span>
               </div>
             </div>
 
-            <div className="form-group col-sm-12 m-b-26">
+            {/* <div className="form-group col-sm-12 m-b-26">
               <div className="p-relative">
                 <label className="label-input100">ขนาดสัตว์เลี้ยง</label>
                 <input type="text" className="form-control input100" id="sizes" placeholder="S, M, L, XL"
@@ -184,7 +222,7 @@ class Request extends Component {
                   }} />
                 <span className="focus-input100"></span>
               </div>
-            </div>
+            </div> */}
 
             <div className="form-group col-sm-12 m-b-26">
               <div className="col-sm-6 nopadding">
@@ -200,7 +238,7 @@ class Request extends Component {
                 </div>
               </div>
             </div>
-          
+
             <div className="form-group col-sm-12 m-b-0">
               <label className="label-input100 p-b-10">ต้นทาง</label>
               {service.source.address &&
@@ -219,7 +257,7 @@ class Request extends Component {
                 <div className="address-gmap">
                   <GMapPicker
                     title=''
-                    coords={service.source}
+                    coordinated={service.source}
                     address={service.source.address}
                     onSelect={this.onSourceLocationChange.bind(this)}
                     onClose={this.onHideMapLocation.bind(this)} />
@@ -245,7 +283,7 @@ class Request extends Component {
                 <div className="address-gmap">
                   <GMapPicker
                     title=''
-                    coords={service.destination}
+                    coordinated={service.destination}
                     address={service.destination.address}
                     onSelect={this.onDestinationLocationChange.bind(this)}
                     onClose={this.onHideMapLocation.bind(this)} />
@@ -254,15 +292,26 @@ class Request extends Component {
             }
 
             <div className="form-group col-sm-12 m-b-26 m-t-32">
-              <label className="label-input100">วันที่</label>
-              <Datetime defaultValue={date} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' inputProps={{ className: "form-control input100 inputDate100", readOnly: true }} onChange={e => {
-                this.setVal('date', e.format())
-              }} />
-              <span className="focus-input100"></span>
-              {/* <input type="date" className="form-control"
-                id="date" value={service.date} value={date} onChange={e => {
-                  this.setVal('date', new Date(e.target.value))
-                }} /> */}
+              <div className="col-sm-6 m-b-13 m-t16">
+                <label className="label-input100">วัน-เวลาที่ต้องการใช้บริการ</label>
+                {/* <Datetime defaultValue={service.date ? date : ''} dateFormat='DD/MM/YYYY' timeFormat='HH:mm' inputProps={{ className: "form-control input100 inputDate100", readOnly: true }} onChange={e => {
+                  this.setVal('date', e.format())
+                }} />
+                <span className="focus-input100"></span> */}
+                <input type="date" className="form-control"
+                  id="date" value={service.date} onChange={e => {
+                    this.setVal('date', e.target.value)
+                  }} />
+                <input type="time" className="form-control"
+                  id="time" value={service.time} onChange={e => {
+                    this.setVal('time', e.target.value)
+                  }} />
+              </div>
+              <div className="col-sm-6 m-b-13 m-t16">
+                <button className="btn btn-sm btn-info" onClick={this.onSubmit}>
+                  เรียกทันที
+                </button>
+              </div>
             </div>
 
             <div className="form-group col-sm-12 m-b-26">
@@ -278,7 +327,7 @@ class Request extends Component {
 
             <div className="form-group col-sm-12 m-b-26">
               <div className="p-relative">
-                <label className="label-input100">เบอร์โทร</label>
+                <label className="label-input100">เบอร์ติดต่อ</label>
                 <input type="number" className="form-control input100" id="customer_phone" placeholder="" onChange={e => {
                   this.setVal('customer.phone', e.target.value)
                 }} />

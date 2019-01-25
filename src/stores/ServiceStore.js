@@ -26,8 +26,9 @@ const defaultData = {
     lat: '',
     lng: '',
   },
-  date: datetime.moment().format(),
+  date: '',
   time: '',
+  datetime: '',
   payment: "cash",
   created: '',
   status: '',
@@ -74,14 +75,13 @@ class HomeStore extends BaseStore {
     this.data = data;
   }
 
-  changePetType(type) {
-    const data = this.toJS().data;
+  changePetType(type, value) {
     switch (type) {
       case 'dog':
-        this.data.type_dog = !data.type_dog;
+        this.data.type_dog = value;
         break;
       case 'cat':
-        this.data.type_cat = !data.type_cat;
+        this.data.type_cat = value;
         break;
       default:
         break;
@@ -92,6 +92,7 @@ class HomeStore extends BaseStore {
     this.loading = true;
     try {
       let data = this.toJS().data;
+      data.datetime = datetime.momentFormStr(data.date + ' ' + data.time, 'dd/MM/yyyy HH:ss');
       data.pet_type = [(data.type_dog) ? 'dog' : false, (data.type_cat) ? 'cat' : false].filter(val => val);
       const res = await http.post(`${process.env.API_URL}/v1/order`, {
         json: data,
