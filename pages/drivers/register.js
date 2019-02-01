@@ -22,7 +22,7 @@ class Register extends Component {
   }
 
   async componentDidMount() {
-    require('../../src/utils/VConsole');
+    // require('../../src/utils/VConsole');
     const liffHelper = require('../../src/utils/Liffhelper');
     let profile;
     try {

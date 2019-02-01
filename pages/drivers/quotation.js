@@ -15,7 +15,7 @@ class Quotation extends Component {
 
   }
   async componentDidMount() {
-    require('../../src/utils/VConsole');
+    // require('../../src/utils/VConsole');
     let liffHelper = require('../../src/utils/Liffhelper');
     liffHelper.default.getProfile()
       .then(async profile => {

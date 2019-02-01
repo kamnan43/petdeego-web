@@ -7,7 +7,7 @@ class Request extends Component {
     super(props);
   }
   componentDidMount() {
-    require('../src/utils/VConsole');
+    // require('../src/utils/VConsole');
     const liffHelper = require('../src/utils/Liffhelper');
     liffHelper.default.getProfile()
       .then(profile => {

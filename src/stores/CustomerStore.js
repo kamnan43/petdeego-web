@@ -2,7 +2,7 @@ import BaseStore from './BaseStore'
 import _ from 'lodash'
 import { http } from '../utils/http';
 
-class DriverStore extends BaseStore {
+class CustomerStore extends BaseStore {
   constructor() {
     super();
     this.observable({
@@ -22,7 +22,7 @@ class DriverStore extends BaseStore {
     this.loading = true;
     this.error = '';
     try {
-      let url = `${process.env.API_URL}/v1/driver/${userId}`;
+      let url = `${process.env.API_URL}/v1/customer/${userId}`;
       let response = await http.get(url);
       if (response.statusCode === 200) {
         this.data = response.body || {};
@@ -34,14 +34,14 @@ class DriverStore extends BaseStore {
     }
   }
 
-  async saveData(driver) {
+  async saveData(customer) {
     this.loading = true;
     this.error = '';
     try {
-      if (!driver.isOldUser) {
-        await http.post(`${process.env.API_URL}/v1/driver`, { json: driver });
+      if (!customer.isOldUser) {
+        await http.post(`${process.env.API_URL}/v1/customer`, { json: driver });
       } else {
-        await http.put(`${process.env.API_URL}/v1/driver/${driver.user_id}`, { json: driver });
+        await http.put(`${process.env.API_URL}/v1/customer/${customer.user_id}`, { json: customer });
       }
     } catch (err) {
       this.error = err.message;
@@ -50,4 +50,4 @@ class DriverStore extends BaseStore {
     }
   }
 }
-export default new DriverStore();
+export default new CustomerStore();

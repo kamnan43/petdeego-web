@@ -27,23 +27,44 @@ class Request extends Component {
     };
   }
 
-  componentDidMount() {
-    require('../../src/utils/VConsole');
+  async componentDidMount() {
+    // require('../../src/utils/VConsole');
     const liffHelper = require('../../src/utils/Liffhelper');
-    liffHelper.default.getProfile()
-      .then(profile => {
-        this.props.service.setCustomer(profile);
-        console.log(profile);
-      })
-      .catch(err => {
-        console.log('err', err);
-        const profile = {
-          userId: 'Uaf01b90203e594b4b43a69290acf68d7',
-          displayName: 'หนึ่ง',
-          pictureUrl: 'http://dl.profile.line-cdn.net/0h2IBMKqnRbWZ_NEAT3P8SMUNxYwsIGmsuBwJxV1pnYVFRDC0zEAEqA1g0YQEHBn00RAV2VVxkMldS',
-        };
-        this.props.service.setCustomer(profile);
-      });
+    let profile;
+    try {
+      profile = await liffHelper.default.getProfile();
+    } catch (err) {
+      // this catch is to test LIFF on PC
+      profile = {
+        userId: 'Uaf01b90203e594b4b43a69290acf68d7',
+        displayName: 'หนึ่ง',
+        pictureUrl: 'http://dl.profile.line-cdn.net/0h2IBMKqnRbWZ_NEAT3P8SMUNxYwsIGmsuBwJxV1pnYVFRDC0zEAEqA1g0YQEHBn00RAV2VVxkMldS',
+      };
+    }
+    // await this.props.customer.getUser(profile.userId);
+    // let user = this.props.customer.data;
+    this.props.service.setCustomer(profile);
+
+    // if (user) {
+    //   this.setState({
+    //     isOldUser: true,
+    //     userId: profile.userId,
+    //     name: user.name,
+    //     image: profile.pictureUrl,
+    //     tel: user.tel,
+    //     isDog: user.isDog,
+    //     isCat: user.isCat,
+    //     isOther: user.isOther,
+    //     hasCage: user.hasCage,
+    //   });
+    // } else {
+    //   this.setState({
+    //     isOldUser: false,
+    //     userId: profile.userId,
+    //     name: profile.displayName,
+    //     image: profile.pictureUrl,
+    //   });
+    // }
   }
 
   onOpenSourceMapPicker() {
@@ -242,12 +263,13 @@ class Request extends Component {
               <div className="col-sm-6 nopadding">
                 <div className="contact100-form-checkbox">
                   <input className="form-check-input input-checkbox100" id="owner"
-                    type="checkbox" name="owner"
-                    onChange={e => {
-                      this.setVal('owner', e.target.checked)
-                    }} />
+                    type="checkbox" name="owner" checked disabled
+                  // onChange={e => {
+                  //   this.setVal('owner', e.target.checked)
+                  // }} 
+                  />
                   <label className="form-check-label label-checkbox100" htmlFor="owner">
-                    เจ้าของไปด้วย
+                    รับเฉพาะกรณีเจ้าของไปด้วยเท่านั้น
                     </label>
                 </div>
               </div>
@@ -366,4 +388,4 @@ class Request extends Component {
   }
 }
 
-export default inject('service')(observer(Request));
+export default inject('service', 'customer')(observer(Request));

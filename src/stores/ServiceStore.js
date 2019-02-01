@@ -51,6 +51,7 @@ class HomeStore extends BaseStore {
   }
 
   setCustomer(customer) {
+    const existedData = this.getCustomer
     this.data.customer = customer;
   }
 
