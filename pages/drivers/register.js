@@ -133,7 +133,7 @@ class Register extends Component {
             <div className="form-group">
               <div className="p-relative">
                 <label className="label-input100">เบอร์ติดต่อ :</label>
-                <input type="text" className="form-control input100" id="txtTel"
+                <input type="number" className="form-control input100" id="txtTel"
                   placeholder=""
                   value={this.state.tel}
                   onChange={event => this.setState({ tel: event.target.value })} />
