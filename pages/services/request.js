@@ -188,7 +188,7 @@ class Request extends Component {
       swal({
         confirmButtonColor: '#00d5ca',
         title: 'บันทึกข้อมูลเรียบร้อย',
-        type: 'success',
+        // type: 'success',
       });
       // setTimeout(() => {
       // }, 1000);
@@ -198,7 +198,7 @@ class Request extends Component {
         type: 'text',
         text: 'ระบบกำลังนัดหมายรถตามที่คุณต้องการ กรุณารอการตอบกลับจากคนขับ'
       };
-      liffHelper.default.sendMessages(message);
+      await liffHelper.default.sendMessages(message);
       liffHelper.default.closeWindow();
     }
 
